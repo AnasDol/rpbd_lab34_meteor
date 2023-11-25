@@ -7,78 +7,12 @@
 
 <body>
 
-  <h1>Сотрудники</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>Фамилия</th>
-        <th>Имя</th>
-        <th>Отчество</th>
-        <th>Адрес</th>
-        <th>Должность</th>
-        <th>Оклад</th>
-      </tr>
-    </thead>
-    <tbody id="employees-list">
-      <!-- Здесь будут отображаться данные о сотрудниках -->
-    </tbody>
-  </table>
-
-  <h1>Животные</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>Кличка</th>
-        <th>Возраст</th>
-        <th>Пол</th>
-        <th>Порода</th>
-        <th>Описание экстерьера</th>
-        <th>Родословная</th>
-        <th>Участие в выставках и соревнованиях</th>
-        <th>Ветеринар</th>
-        <th>Хозяин</th>
-      </tr>
-    </thead>
-    <tbody id="animals-list">
-      <!-- Здесь будут отображаться данные о животных -->
-    </tbody>
-  </table>
-
-  <h1>Клиенты</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>Фамилия</th>
-        <th>Имя</th>
-        <th>Отчество</th>
-        <th>Адрес</th>
-      </tr>
-    </thead>
-    <tbody id="clients-list">
-      <!-- Здесь будут отображаться данные о клиентах -->
-    </tbody>
-  </table>
-
-  <h1>Заявки</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>Клиент</th>
-        <th>Порода</th>
-        <th>Пол</th>
-        <th>Дата заявки</th>
-      </tr>
-    </thead>
-    <tbody id="applications-list">
-      <!-- Здесь будут отображаться данные о заявках -->
-    </tbody>
-  </table>
-
-
   <!-- Кнопка для открытия формы -->
   <button id="showEmployeeFormButton">Добавить нового сотрудника</button>
   <!-- Кнопка для открытия формы добавления животного -->
   <button id="showAnimalFormButton">Добавить нового животного</button>
+  <!-- Кнопка для открытия формы добавления клиента -->
+  <button id="showClientFormButton">Добавить нового клиента</button>
 
   <!-- Форма для добавления нового сотрудника (изначально скрыта) -->
   <form id="addEmployeeForm" style="display: none;">
@@ -150,6 +84,23 @@
     <input type="submit" value="Добавить животное">
   </form>
 
+  <!-- Форма добавления клиента (изначально скрыта) -->
+  <form id="addClientForm" style="display: none;">
+    <label for="clientLastName">Фамилия:</label>
+    <input type="text" id="clientLastName" name="clientLastName" required><br>
+
+    <label for="clientFirstName">Имя:</label>
+    <input type="text" id="clientFirstName" name="clientFirstName" required><br>
+
+    <label for="clientPatronymic">Отчество:</label>
+    <input type="text" id="clientPatronymic" name="clientPatronymic" required><br>
+
+    <label for="clientAddress">Адрес:</label>
+    <input type="text" id="clientAddress" name="clientAddress" required><br>
+
+    <input type="submit" value="Добавить клиента">
+  </form>
+
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/meteor/1.12.1/meteor.js"></script>
   <script src="main.js"></script>
@@ -159,20 +110,26 @@
     $(document).ready(function() {
       $("#showEmployeeFormButton").click(function() {
         $("#addEmployeeForm").toggle();
-        $("#addAnimalForm").hide();
+        $("#addAnimalForm, #addClientForm").hide();
         $(this).addClass("active");
-        $("#showAnimalFormButton").removeClass("active");
+        $("#showAnimalFormButton, #showClientFormButton").removeClass("active");
       });
 
       $("#showAnimalFormButton").click(function() {
         $("#addAnimalForm").toggle();
-        $("#addEmployeeForm").hide();
+        $("#addEmployeeForm, #addClientForm").hide();
         $(this).addClass("active");
-        $("#showEmployeeFormButton").removeClass("active");
+        $("#showEmployeeFormButton, #showClientFormButton").removeClass("active");
+      });
+
+      $("#showClientFormButton").click(function() {
+        $("#addClientForm").toggle();
+        $("#addEmployeeForm, #addAnimalForm").hide();
+        $(this).addClass("active");
+        $("#showEmployeeFormButton, #showAnimalFormButton").removeClass("active");
       });
     });
   </script>
-
   <!-- Здесь можно добавить формы для добавления, редактирования и удаления данных -->
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
