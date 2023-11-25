@@ -8,14 +8,14 @@
 <body>
 
   <!-- Кнопка для открытия формы -->
-  <button id="showEmployeeFormButton">Добавить нового сотрудника</button>
+  <button class="showFormButton" data-form="addEmployeeForm">Добавить нового сотрудника</button>
   <!-- Кнопка для открытия формы добавления животного -->
-  <button id="showAnimalFormButton">Добавить нового животного</button>
+  <button class="showFormButton" data-form="addAnimalForm">Добавить нового животного</button>
   <!-- Кнопка для открытия формы добавления клиента -->
-  <button id="showClientFormButton">Добавить нового клиента</button>
+  <button class="showFormButton" data-form="addClientForm">Добавить нового клиента</button>
 
   <!-- Форма для добавления нового сотрудника (изначально скрыта) -->
-  <form id="addEmployeeForm" style="display: none;">
+  <form id="addEmployeeForm" class="addForm" style="display: none;">
     <label for="lastName">Фамилия:</label>
     <input type="text" id="lastName" name="lastName" required><br>
 
@@ -40,7 +40,7 @@
   </form>
 
   <!-- Форма добавления животного (изначально скрыта) -->
-  <form id="addAnimalForm" style="display: none;">
+  <form id="addAnimalForm" class="addForm" style="display: none;">
     <label for="petName">Кличка:</label>
     <input type="text" id="petName" name="petName" required><br>
 
@@ -85,7 +85,7 @@
   </form>
 
   <!-- Форма добавления клиента (изначально скрыта) -->
-  <form id="addClientForm" style="display: none;">
+  <form id="addClientForm" class="addForm" style="display: none;">
     <label for="clientLastName">Фамилия:</label>
     <input type="text" id="clientLastName" name="clientLastName" required><br>
 
@@ -108,28 +108,18 @@
   <script>
     // Обработчики для кнопок, чтобы отобразить соответствующие формы и подсветить кнопку
     $(document).ready(function() {
-      $("#showEmployeeFormButton").click(function() {
-        $("#addEmployeeForm").toggle();
-        $("#addAnimalForm, #addClientForm").hide();
+      $(".showFormButton").click(function() {
+        var formId = $(this).data("form");
+        $(".addForm").hide();
+        $("#" + formId).toggle();
+        $(".showFormButton").removeClass("active");
         $(this).addClass("active");
-        $("#showAnimalFormButton, #showClientFormButton").removeClass("active");
-      });
-
-      $("#showAnimalFormButton").click(function() {
-        $("#addAnimalForm").toggle();
-        $("#addEmployeeForm, #addClientForm").hide();
-        $(this).addClass("active");
-        $("#showEmployeeFormButton, #showClientFormButton").removeClass("active");
-      });
-
-      $("#showClientFormButton").click(function() {
-        $("#addClientForm").toggle();
-        $("#addEmployeeForm, #addAnimalForm").hide();
-        $(this).addClass("active");
-        $("#showEmployeeFormButton, #showAnimalFormButton").removeClass("active");
       });
     });
   </script>
+
+
+
   <!-- Здесь можно добавить формы для добавления, редактирования и удаления данных -->
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
