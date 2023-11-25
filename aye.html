@@ -7,12 +7,13 @@
 
 <body>
 
-  <!-- Кнопка для открытия формы -->
-  <button class="showFormButton" data-form="addEmployeeForm">Добавить нового сотрудника</button>
-  <!-- Кнопка для открытия формы добавления животного -->
-  <button class="showFormButton" data-form="addAnimalForm">Добавить нового животного</button>
-  <!-- Кнопка для открытия формы добавления клиента -->
-  <button class="showFormButton" data-form="addClientForm">Добавить нового клиента</button>
+<!-- Кнопки для открытия форм -->
+<button class="showFormButton" data-form="addEmployeeForm">Добавить нового сотрудника</button>
+<button class="showFormButton" data-form="addAnimalForm">Добавить нового животного</button>
+<button class="showFormButton" data-form="addClientForm">Добавить нового клиента</button>
+<button class="showFormButton" data-form="addExhibitionForm">Добавить новую выставку</button>
+<button class="showFormButton" data-form="addBreedForm">Добавить новую породу</button>
+
 
   <!-- Форма для добавления нового сотрудника (изначально скрыта) -->
   <form id="addEmployeeForm" class="addForm" style="display: none;">
@@ -100,6 +101,28 @@
 
     <input type="submit" value="Добавить клиента">
   </form>
+
+
+  <form id="addExhibitionForm" class="addForm" style="display: none;">
+    <label for="exhibitionName">Название выставки:</label>
+    <input type="text" id="exhibitionName" name="exhibitionName" required><br>
+
+    <label for="exhibitionAddress">Адрес выставки:</label>
+    <input type="text" id="exhibitionAddress" name="exhibitionAddress"><br>
+
+    <label for="exhibitionDate">Дата проведения:</label>
+    <input type="date" id="exhibitionDate" name="exhibitionDate" required><br>
+
+    <input type="submit" value="Добавить выставку">
+  </form>
+
+  <form id="addBreedForm" class="addForm" style="display: none;">
+    <label for="breedName">Название породы:</label>
+    <input type="text" id="breedName" name="breedName" required><br>
+
+    <input type="submit" value="Добавить породу">
+  </form>
+
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/meteor/1.12.1/meteor.js"></script>
