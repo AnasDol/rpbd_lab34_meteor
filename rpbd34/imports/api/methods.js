@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Tasks } from './tasks';
 import { Breeds } from './breeds';
+import { Clients } from './clients';
 
 Meteor.methods({
     'tasks.insert'(text) {
@@ -14,7 +15,10 @@ Meteor.methods({
     },
     'breeds.get'() {
         return Breeds.find().fetch();
-      },
+    },
+     'clients.get'() {
+       return Clients.find().fetch();
+     },
   });
   
 // export const createCollectionMethods = (collection) => {

@@ -2,18 +2,27 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { render } from 'react-dom';
 
-import CollectionList from '../imports/ui/CollectionList';
-import AddTaskForm from '../imports/ui/AddTaskForm';
 import BreedList from '../imports/ui/BreedList';
+import ClientList from '../imports/ui/ClientList';
 
 Meteor.startup(() => {
   render(
     <>
-      <CollectionList collectionName="tasks" />
-      <AddTaskForm />
       <BreedList/>
+      <ClientList/>
     </>,
     document.getElementById('app')
   );
 });
+
+// import BreedList from '../imports/ui/BreedList';
+// 
+
+// const App = () => {
+//   const [activeComponent, setActiveComponent] = useState('breeds');
+
+//   const handleMenuClick = (component) => {
+//     setActiveComponent(component);
+//   };
+// }
 
