@@ -28,15 +28,15 @@ const BreedList = () => {
   };
 
   return (
-    <div>
+    <div className="breeds-container">
       <h2>Breeds List</h2>
       <table className="breeds-table">
         <thead>
           <tr>
-            <th>#</th>
-            <th>Name</th>
+            <th style={{ width: '50px' }}>#</th>
+            <th style={{ width: '200px' }}>Name</th>
             {selectedBreed && (
-              <th>Actions</th>
+              <th style={{ width: '300px' }}>Actions</th>
             )}
           </tr>
         </thead>
@@ -50,7 +50,7 @@ const BreedList = () => {
               <td>{index + 1}</td>
               <td>{breed.name}</td>
               {selectedBreed && selectedBreed._id === breed._id && (
-                <td>
+                <td className="buttons-container">
                   <button className="update-button" onClick={handleUpdateClick}>Обновить данные</button>
                   <button className="delete-button" onClick={handleDeleteClick}>Удалить строку</button>
                 </td>

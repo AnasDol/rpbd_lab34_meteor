@@ -11,7 +11,7 @@ Meteor.startup(() => {
     <>
       <CollectionList collectionName="tasks" />
       <AddTaskForm />
-      <BreedList />
+      <BreedList/>
     </>,
     document.getElementById('app')
   );
