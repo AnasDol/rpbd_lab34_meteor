@@ -22,6 +22,12 @@
     border: 1px solid #ddd;
   }
   
+  thead th {
+    position: sticky;
+    top: 0;
+    background-color: #fff; /* Фоновый цвет для сохранения видимости заголовка */
+  }
+  
   .selected-row {
     background-color: #f0f8ff;
   }

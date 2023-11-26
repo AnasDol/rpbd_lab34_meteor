@@ -31,24 +31,24 @@ const BreedList = () => {
       <h2>Breeds List</h2>
       <div className="table-container">
         <table className="breeds-table">
-            <thead>
+          <thead>
             <tr>
-                <th style={{ width: '50px' }}>#</th>
-                <th style={{ width: '200px' }}>Name</th>
+              <th style={{ width: '50px' }}>#</th>
+              <th style={{ width: '200px' }}>Name</th>
             </tr>
-            </thead>
-            <tbody>
+          </thead>
+          <tbody>
             {breeds.map((breed, index) => (
-                <tr
+              <tr
                 key={breed._id}
                 onClick={() => handleBreedClick(breed)}
                 className={selectedBreed && selectedBreed._id === breed._id ? 'selected-row' : ''}
-                >
+              >
                 <td>{index + 1}</td>
                 <td>{breed.name}</td>
-                </tr>
+              </tr>
             ))}
-            </tbody>
+          </tbody>
         </table>
       </div>
       {selectedBreed && (
