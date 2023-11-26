@@ -3,6 +3,7 @@ import { LinksCollection } from '/imports/api/links';
 
 import '../imports/api/methods';
 import { Tasks } from '../imports/api/tasks';
+import { Breeds } from '../imports/api/breeds';
 
 Meteor.startup(async () => {
 
@@ -11,6 +12,14 @@ Meteor.startup(async () => {
     Tasks.insert({ text: 'Сделать что-то важное' });
     Tasks.insert({ text: 'Завершить проект' });
     Tasks.insert({ text: 'Подготовить отчет' });
+  }
+
+  // Проверка, пуста ли коллекция breeds
+  if (Breeds.find().count() === 0) {
+    // Если пуста, добавьте примеры данных
+    Breeds.insert({ name: 'Example Breed 1' });
+    Breeds.insert({ name: 'Example Breed 2' });
+    // Добавьте столько записей, сколько вам нужно
   }
 
 
