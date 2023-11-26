@@ -26,9 +26,14 @@ const BreedList = () => {
     console.log(`Deleting breed with ID: ${selectedBreed._id}`);
   };
 
+  const handleAddNewClick = () => {
+    console.log('Adding new breed');
+    // Добавьте здесь код для добавления новой записи
+  };
+
   return (
     <div className="breeds-container">
-      <h2>Breeds List</h2>
+      <h2>Breed List</h2>
       <div className="table-container">
         <table className="breeds-table">
           <thead>
@@ -57,6 +62,7 @@ const BreedList = () => {
           <button className="delete-button" onClick={handleDeleteClick}>Удалить строку</button>
         </div>
       )}
+      <button className="add-new-button" onClick={handleAddNewClick}>Добавить новую запись</button>
     </div>
   );
 };
