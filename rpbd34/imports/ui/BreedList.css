@@ -4,6 +4,11 @@
     align-items: center;
   }
   
+  .table-container {
+    overflow: auto;
+    max-height: 510px; /* Замените на желаемую высоту */
+  }
+  
   .breeds-table {
     width: 300px;
     margin-bottom: 20px;
@@ -22,6 +27,7 @@
   }
   
   .buttons-container {
+    margin-top: 20px;
     display: flex;
     align-items: center;
   }

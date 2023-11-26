@@ -9,7 +9,6 @@ Meteor.startup(() => {
   render(
     <>
       <BreedList/>
-      <ClientList/>
     </>,
     document.getElementById('app')
   );

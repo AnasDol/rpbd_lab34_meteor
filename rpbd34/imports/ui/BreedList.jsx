@@ -29,26 +29,28 @@ const BreedList = () => {
   return (
     <div className="breeds-container">
       <h2>Breeds List</h2>
-      <table className="breeds-table">
-        <thead>
-          <tr>
-            <th style={{ width: '50px' }}>#</th>
-            <th style={{ width: '200px' }}>Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          {breeds.map((breed, index) => (
-            <tr
-              key={breed._id}
-              onClick={() => handleBreedClick(breed)}
-              className={selectedBreed && selectedBreed._id === breed._id ? 'selected-row' : ''}
-            >
-              <td>{index + 1}</td>
-              <td>{breed.name}</td>
+      <div className="table-container">
+        <table className="breeds-table">
+            <thead>
+            <tr>
+                <th style={{ width: '50px' }}>#</th>
+                <th style={{ width: '200px' }}>Name</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+            </thead>
+            <tbody>
+            {breeds.map((breed, index) => (
+                <tr
+                key={breed._id}
+                onClick={() => handleBreedClick(breed)}
+                className={selectedBreed && selectedBreed._id === breed._id ? 'selected-row' : ''}
+                >
+                <td>{index + 1}</td>
+                <td>{breed.name}</td>
+                </tr>
+            ))}
+            </tbody>
+        </table>
+      </div>
       {selectedBreed && (
         <div className="buttons-container">
           <button className="update-button" onClick={handleUpdateClick}>Обновить данные</button>
