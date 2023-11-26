@@ -1,0 +1,50 @@
+<!-- <head>
+  <title>rpbd34</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <div id="react-target"></div>
+</body> -->
+
+<head>
+  <title>Meteor React App</title>
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/meteor/meteor"></script>
+
+  <script>
+    import React, { useState, useEffect } from 'react';
+    import { Meteor } from 'meteor/meteor';
+    import { render } from 'react-dom';
+
+    const TaskList = () => {
+      const [tasks, setTasks] = useState([]);
+
+      useEffect(() => {
+        Meteor.call('tasks.get', (error, result) => {
+          if (!error) {
+            setTasks(result);
+          }
+        });
+      }, []);
+
+      return (
+        <ul>
+          {tasks.map(task => (
+            <li key={task._id}>{task.text}</li>
+          ))}
+        </ul>
+      );
+    };
+
+    Meteor.startup(() => {
+      render(<TaskList />, document.getElementById('app'));
+    });
+  </script>
+</body>
