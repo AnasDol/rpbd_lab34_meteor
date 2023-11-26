@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Meteor } from 'meteor/meteor';
-
-import './BreedList.css'; // Импортируем файл стилей
+import './BreedList.css';
 
 const BreedList = () => {
   const [breeds, setBreeds] = useState([]);
@@ -35,9 +34,6 @@ const BreedList = () => {
           <tr>
             <th style={{ width: '50px' }}>#</th>
             <th style={{ width: '200px' }}>Name</th>
-            {selectedBreed && (
-              <th style={{ width: '300px' }}>Actions</th>
-            )}
           </tr>
         </thead>
         <tbody>
@@ -49,16 +45,16 @@ const BreedList = () => {
             >
               <td>{index + 1}</td>
               <td>{breed.name}</td>
-              {selectedBreed && selectedBreed._id === breed._id && (
-                <td className="buttons-container">
-                  <button className="update-button" onClick={handleUpdateClick}>Обновить данные</button>
-                  <button className="delete-button" onClick={handleDeleteClick}>Удалить строку</button>
-                </td>
-              )}
             </tr>
           ))}
         </tbody>
       </table>
+      {selectedBreed && (
+        <div className="buttons-container">
+          <button className="update-button" onClick={handleUpdateClick}>Обновить данные</button>
+          <button className="delete-button" onClick={handleDeleteClick}>Удалить строку</button>
+        </div>
+      )}
     </div>
   );
 };
