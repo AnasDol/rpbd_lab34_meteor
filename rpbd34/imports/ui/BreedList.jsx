@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Meteor } from 'meteor/meteor';
 
+import './BreedList.css'; // Импортируем файл стилей
+
 const BreedList = () => {
   const [breeds, setBreeds] = useState([]);
   const [selectedBreed, setSelectedBreed] = useState(null);
@@ -18,21 +20,17 @@ const BreedList = () => {
   };
 
   const handleUpdateClick = () => {
-    // Здесь можно добавить логику для обновления данных
-    // Например, вызов метода Meteor для обновления данных в коллекции
     console.log(`Updating data for breed with ID: ${selectedBreed._id}`);
   };
 
   const handleDeleteClick = () => {
-    // Здесь можно добавить логику для удаления данных
-    // Например, вызов метода Meteor для удаления данных из коллекции
     console.log(`Deleting breed with ID: ${selectedBreed._id}`);
   };
 
   return (
     <div>
       <h2>Breeds List</h2>
-      <table>
+      <table className="breeds-table">
         <thead>
           <tr>
             <th>#</th>
@@ -44,13 +42,17 @@ const BreedList = () => {
         </thead>
         <tbody>
           {breeds.map((breed, index) => (
-            <tr key={breed._id} onClick={() => handleBreedClick(breed)}>
+            <tr
+              key={breed._id}
+              onClick={() => handleBreedClick(breed)}
+              className={selectedBreed && selectedBreed._id === breed._id ? 'selected-row' : ''}
+            >
               <td>{index + 1}</td>
               <td>{breed.name}</td>
               {selectedBreed && selectedBreed._id === breed._id && (
                 <td>
-                  <button onClick={handleUpdateClick}>Обновить данные</button>
-                  <button onClick={handleDeleteClick}>Удалить строку</button>
+                  <button className="update-button" onClick={handleUpdateClick}>Обновить данные</button>
+                  <button className="delete-button" onClick={handleDeleteClick}>Удалить строку</button>
                 </td>
               )}
             </tr>
