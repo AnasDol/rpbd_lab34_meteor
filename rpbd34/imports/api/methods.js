@@ -30,4 +30,9 @@ Meteor.methods({
       check(breedId, String);
       Breeds.remove(breedId);
     },
+    'breeds.update'(breedId, breedData) {
+      check(breedId, String);
+      check(breedData, Object);
+      Breeds.update(breedId, { $set: breedData });
+    },
   });
