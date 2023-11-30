@@ -8,8 +8,6 @@ import { Clients } from '../imports/api/clients';
 
 Meteor.startup(async () => {
 
-  Breeds.remove({});
-
   if (Tasks.find().count() === 0) {
     // Если коллекция пуста, добавляем начальные элементы
     Tasks.insert({ text: 'Сделать что-то важное' });
