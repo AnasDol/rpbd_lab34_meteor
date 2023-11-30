@@ -1,0 +1,95 @@
+.clients-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .table-container {
+    overflow: auto;
+    max-height: 510px; /* Replace with the desired height */
+  }
+  
+  .clients-table {
+    width: 750px;
+    margin-bottom: 20px;
+    table-layout: fixed;
+    border-collapse: collapse;
+  }
+  
+  .clients-table th,
+  .clients-table td {
+    text-align: center;
+    padding: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  thead th {
+    position: sticky;
+    top: 0;
+    background-color: #fff; /* Background color to maintain header visibility */
+  }
+  
+  .selected-row {
+    background-color: #f0f8ff;
+  }
+  
+  .buttons-container {
+    margin-top: 5px;
+    align-items: center;
+    display: flex;
+  }
+  
+  .update-button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .update-button:hover {
+    background-color: #45a049;
+  }
+  
+  .delete-button {
+    background-color: #df4438;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .delete-button:hover {
+    background-color: #ab3d35;
+  }
+  
+  .add-new-button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-top: 10px;
+  }
+  
+  .add-new-button:hover {
+    background-color: #45a049;
+  }
+  
+  .AddForm {
+    margin-top: 20px;
+    display: none;
+  }
+  
+  .AddForm label {
+    margin-right: 10px;
+  }
+  
+  .AddForm input {
+    margin-bottom: 10px;
+  }

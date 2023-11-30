@@ -6,6 +6,10 @@ const Menu = ({ setActiveTab }) => {
     setActiveTab('breedList');
   };
 
+  const handleClientListClick = () => {
+    setActiveTab('clientList');
+  };
+
   const handleTaskListClick = () => {
     setActiveTab('taskList');
   };
@@ -13,7 +17,10 @@ const Menu = ({ setActiveTab }) => {
   return (
     <div className="menu-container">
       <button className="menu-button" onClick={handleBreedListClick}>
-        Breed List
+        Породы
+      </button>
+      <button className="menu-button" onClick={handleClientListClick}>
+        Клиенты
       </button>
       <button className="menu-button" onClick={handleTaskListClick}>
         Task List

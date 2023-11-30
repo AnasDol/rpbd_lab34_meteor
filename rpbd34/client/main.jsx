@@ -20,6 +20,7 @@ import { render } from 'react-dom';
 import BreedList from '../imports/ui/BreedList';
 import TaskList from '../imports/ui/TaskList';
 import Menu from '../imports/ui/Menu';
+import ClientList from '../imports/ui/ClientList';
 
 Meteor.startup(() => {
   const App = () => {
@@ -29,6 +30,7 @@ Meteor.startup(() => {
       <>
         <Menu setActiveTab={setActiveTab} />
         {activeTab === 'breedList' && <BreedList />}
+        {activeTab === 'clientList' && <ClientList />}
         {activeTab === 'taskList' && <TaskList />}
       </>
     );

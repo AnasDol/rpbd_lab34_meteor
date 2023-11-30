@@ -17,9 +17,7 @@ Meteor.methods({
     'breeds.get'() {
         return Breeds.find().fetch();
     },
-     'clients.get'() {
-       return Clients.find().fetch();
-     },
+
      'breeds.insert'(breedData) {
       Breeds.insert(breedData);
     },
@@ -35,4 +33,29 @@ Meteor.methods({
       check(breedData, Object);
       Breeds.update(breedId, { $set: breedData });
     },
+
+  'clients.get'() {
+    return Clients.find().fetch();
+  },
+   'clients.insert'(clientData) {
+    Clients.insert(clientData);
+  },
+  'clients.remove'(clientId) {
+    // if (!Meteor.userId()) {
+    //   throw new Meteor.Error('not-authorized', 'You are not authorized to remove breeds.');
+    // }
+    check(clientId, String);
+    Breeds.remove(clientId);
+  },
+  'clients.update'(clientId, clientData) {
+    check(clientId, String);
+    check(clientData, Object);
+    Clients.update(clientId, { $set: clientData });
+  },
+
+
+
+
+
+
   });
