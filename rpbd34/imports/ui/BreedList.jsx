@@ -27,19 +27,46 @@ const BreedList = () => {
 
   const handleDeleteClick = () => {
     console.log(`Deleting breed with ID: `, selectedBreed != null ? selectedBreed._id : `null`);
+    if (selectedBreed) {
+      const breedId = selectedBreed._id;
+  
+      Meteor.call('breeds.remove', breedId, (error) => {
+        if (error) {
+          console.error('Error deleting breed:', error);
+        } else {
+          // Fetch the updated list of breeds after deletion
+          Meteor.call('breeds.get', (error, result) => {
+            if (!error) {
+              setBreeds(result);
+            } else {
+              console.error('Error fetching updated breeds:', error);
+            }
+          });
+  
+          console.log(`Breed with ID ${breedId} deleted successfully!`);
+          setSelectedBreed(null); // Clear the selected breed after deletion
+        }
+      });
+    } else {
+      console.warn('No breed selected for deletion.');
+    }
   };
 
   const handleAddBreed = (breedData) => {
     console.log('Adding new breed', breedData);
-    // Добавьте здесь код для добавления новой записи
-    // breedData - данные, которые передаются из формы
-    // Например, breedData может содержать { name: 'Название породы' }
-    // Закрываем форму и показываем кнопки
 
     Meteor.call('breeds.insert', breedData, (error) => {
       if (error) {
         console.error('Error inserting breed:', error);
       } else {
+        // Fetch the updated list of breeds after insertion
+        Meteor.call('breeds.get', (error, result) => {
+          if (!error) {
+            setBreeds(result);
+          } else {
+            console.error('Error fetching updated breeds:', error);
+          }
+        });
         console.log('Breed inserted successfully!');
         setShowAddForm(false);
       }

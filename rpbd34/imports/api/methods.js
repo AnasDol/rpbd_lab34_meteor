@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
 import { Tasks } from './tasks';
 import { Breeds } from './breeds';
 import { Clients } from './clients';
@@ -22,15 +23,11 @@ Meteor.methods({
      'breeds.insert'(breedData) {
       Breeds.insert(breedData);
     },
+    'breeds.remove'(breedId) {
+      // if (!Meteor.userId()) {
+      //   throw new Meteor.Error('not-authorized', 'You are not authorized to remove breeds.');
+      // }
+      check(breedId, String);
+      Breeds.remove(breedId);
+    },
   });
-  
-// export const createCollectionMethods = (collection) => {
-//   Meteor.methods({
-//     [`${collection}.insert`](data) {
-//       collection.insert(data);
-//     },
-//     [`${collection}.get`]() {
-//       return collection.find().fetch();
-//     },
-//   });
-// };
