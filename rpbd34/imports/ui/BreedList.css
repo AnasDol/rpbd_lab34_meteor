@@ -33,9 +33,9 @@ thead th {
 }
 
 .buttons-container {
-    margin-top: 20px;
-    display: flex;
+    margin-top: 5px;
     align-items: center;
+    display: flex;
 }
 
 .update-button {

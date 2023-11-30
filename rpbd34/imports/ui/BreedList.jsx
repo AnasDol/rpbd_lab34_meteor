@@ -56,6 +56,11 @@ const BreedList = () => {
     }
   };
 
+  const handleAddClick = () => {
+    setFormMode('add');
+    setShowAddForm(true);
+  };
+
   const handleAddBreed = (breedData) => {
     console.log('Adding new breed', breedData);
 
@@ -132,16 +137,20 @@ const BreedList = () => {
       {showAddForm ? (
         <AddBreedForm onSubmit={handleAddBreed} breed={selectedBreed} mode={formMode} />
       ) : (
-        <div className="buttons-container">
-          <button className="update-button" onClick={handleUpdateClick}>
-            Обновить данные
-          </button>
-          <button className="delete-button" onClick={handleDeleteClick}>
-            Удалить строку
-          </button>
-          <button className="add-new-button" onClick={() => setShowAddForm(true)}>
-            Добавить новую запись
-          </button>
+        <div>
+          <div className="buttons-container">
+            <button className="update-button" onClick={handleUpdateClick}>
+              Обновить данные
+            </button>
+            <button className="delete-button" onClick={handleDeleteClick}>
+              Удалить строку
+            </button>
+          </div>
+          <div className="buttons-container">
+            <button className="add-new-button" onClick={handleAddClick}>
+              Добавить новую запись
+            </button>
+          </div>
         </div>
       )}
     </div>
