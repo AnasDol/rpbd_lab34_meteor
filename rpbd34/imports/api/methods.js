@@ -45,7 +45,7 @@ Meteor.methods({
     //   throw new Meteor.Error('not-authorized', 'You are not authorized to remove breeds.');
     // }
     check(clientId, String);
-    Breeds.remove(clientId);
+    Clients.remove(clientId);
   },
   'clients.update'(clientId, clientData) {
     check(clientId, String);

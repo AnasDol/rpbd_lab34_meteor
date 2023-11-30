@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Meteor } from 'meteor/meteor';
-import './ClientList.css';
+// import './ClientList.css';
 import AddClientForm from './AddClientForm';
 
 const ClientList = () => {

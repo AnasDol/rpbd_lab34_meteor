@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Meteor } from 'meteor/meteor';
-import './BreedList.css';
+import './styles.css';
 import AddBreedForm from './AddBreedForm';
 
 const BreedList = () => {

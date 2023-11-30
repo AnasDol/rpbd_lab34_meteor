@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './ClientList.css';
+//import './ClientList.css';
 
 const AddClientForm = ({ onSubmit, client, mode }) => {
   const [lastName, setLastName] = useState('');

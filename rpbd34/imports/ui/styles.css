@@ -91,3 +91,43 @@ thead th {
   .addForm input {
     margin-bottom: 10px;
   }
+
+  .menu-container {
+    display: flex;
+    justify-content: space-around;
+    background-color: #f2f2f2;
+    padding: 10px;
+  }
+  
+  .menu-button {
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    background-color: inherit;
+    font-size: 16px;
+    outline: none;
+  }
+  
+  .menu-button:hover {
+    background-color: #ddd;
+  }
+
+  .clients-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .clients-table {
+    width: 750px;
+    margin-bottom: 20px;
+    table-layout: fixed;
+    border-collapse: collapse;
+  }
+  
+  .clients-table th,
+  .clients-table td {
+    text-align: center;
+    padding: 8px;
+    border: 1px solid #ddd;
+  }
