@@ -31,7 +31,6 @@ const BreedList = () => {
   };
 
   const handleDeleteClick = () => {
-    console.log(`Deleting breed with ID: `, selectedBreed != null ? selectedBreed._id : `null`);
     if (selectedBreed) {
       const breedId = selectedBreed._id;
 
@@ -76,7 +75,9 @@ const BreedList = () => {
           console.log('Breed inserted successfully!');
         }
       });
+
     } else if (formMode === 'update') {
+
       if (selectedBreed) {
         const breedId = selectedBreed._id;
         Meteor.call('breeds.update', breedId, breedData, (error) => {
@@ -133,7 +134,7 @@ const BreedList = () => {
       ) : (
         <div className="buttons-container">
           <button className="update-button" onClick={handleUpdateClick}>
-            {formMode === 'add' ? 'Добавить новую запись' : 'Обновить данные'}
+            Обновить данные
           </button>
           <button className="delete-button" onClick={handleDeleteClick}>
             Удалить строку
