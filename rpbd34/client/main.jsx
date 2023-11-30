@@ -7,25 +7,26 @@ import TaskList from '../imports/ui/TaskList';
 import Menu from '../imports/ui/Menu';
 import ClientList from '../imports/ui/ClientList';
 import AddClientForm from '../imports/ui/AddClientForm';
+import App from './App'
 
 Meteor.startup(() => {
   const App = () => {
     const [activeTab, setActiveTab] = useState('breedList');
 
-    // return (
-    //   <>
-    //     <AddClientForm/>
-    //   </>
-    // )
-
     return (
       <>
-        <Menu setActiveTab={setActiveTab} />
-        {activeTab === 'breedList' && <BreedList />}
-        {activeTab === 'clientList' && <ClientList />}
-        {activeTab === 'taskList' && <TaskList />}
+        <App/>
       </>
-    );
+    )
+
+    // return (
+    //   <>
+    //     <Menu setActiveTab={setActiveTab} />
+    //     {activeTab === 'breedList' && <BreedList />}
+    //     {activeTab === 'clientList' && <ClientList />}
+    //     {activeTab === 'taskList' && <TaskList />}
+    //   </>
+    // );
   };
 
   render(<App />, document.getElementById('app'));

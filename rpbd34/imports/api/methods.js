@@ -3,8 +3,16 @@ import { check } from 'meteor/check';
 import { Tasks } from './tasks';
 import { Breeds } from './breeds';
 import { Clients } from './clients';
+import { Roles } from 'meteor/alanning:roles';
 
 Meteor.methods({
+  'users.addRole'(userId, role) {
+    if (!this.userId || !Roles.userIsInRole(this.userId, 'admin')) {
+      throw new Meteor.Error('not-authorized', 'You are not authorized to add roles.');
+    }
+
+    Roles.addUsersToRoles(userId, role);
+  },
     'tasks.insert'(text) {
       Tasks.insert({
         text,

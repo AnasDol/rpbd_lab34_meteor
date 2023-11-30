@@ -1,12 +1,37 @@
 import { Meteor } from 'meteor/meteor';
 import { LinksCollection } from '/imports/api/links';
+import { Roles } from 'meteor/alanning:roles'; // Add this import
 
-import '../imports/api/methods';
 import { Tasks } from '../imports/api/tasks';
 import { Breeds } from '../imports/api/breeds';
 import { Clients } from '../imports/api/clients';
 
+import { Accounts } from 'meteor/accounts-base';
+import '/imports/api/methods.js';
+import '/imports/api/publications.js';
+
+Accounts.config({
+  forbidClientAccountCreation: true, // Disable client-side account creation
+});
+
 Meteor.startup(async () => {
+  // Create an admin user
+  const adminUsername = 'admin';
+  const adminPassword = 'adminPassword';
+
+  if (!Meteor.users.findOne({ username: adminUsername })) {
+
+    Roles.createRole('admin');
+
+    const adminUserId = Accounts.createUser({
+      username: adminUsername,
+      password: adminPassword,
+    });
+
+    Roles.addUsersToRoles(adminUserId, 'admin');
+  }
+
+
 
   if (Tasks.find().count() === 0) {
     // Если коллекция пуста, добавляем начальные элементы
