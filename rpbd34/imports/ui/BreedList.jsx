@@ -62,7 +62,6 @@ const BreedList = () => {
   };
 
   const handleAddBreed = (breedData) => {
-    console.log('Adding new breed', breedData);
 
     if (formMode === 'add') {
       Meteor.call('breeds.insert', breedData, (error) => {
