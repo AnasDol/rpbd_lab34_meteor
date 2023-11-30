@@ -1,0 +1,15 @@
+запустить сервер:
+meteor
+
+консоль mongodb:
+
+mongosh 127.0.0.1:3001
+use meteor
+
+или
+
+mongosh mongodb://127.0.0.1:3001/meteor
+
+вывод коллекции breeds:
+
+db.breeds.find().pretty()

@@ -19,6 +19,9 @@ Meteor.methods({
      'clients.get'() {
        return Clients.find().fetch();
      },
+     'breeds.insert'(breedData) {
+      Breeds.insert(breedData);
+    },
   });
   
 // export const createCollectionMethods = (collection) => {
