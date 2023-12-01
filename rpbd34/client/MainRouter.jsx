@@ -1,13 +1,35 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+// import React from 'react';
+// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+// import App from './App';
+// import Login from './components/Login';
+
+// const MainRouter = () => {
+//   return (
+//     <Router>
+//       <Switch>
+//         <Route exact path="/login" component={Login} />
+//         <Route path="/" component={App} />
+//       </Switch>
+//     </Router>
+//   );
+// };
+
+// export default MainRouter;
+
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import App from './App';
+import Login from './components/Login';
+import BreedList from '../imports/ui/BreedList';
 
 const MainRouter = () => {
   return (
     <Router>
-      <Switch>
-        <Route path="/" exact component={App} />
-        {/* Add other routes as needed */}
-      </Switch>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<BreedList />} />
+        <Route path="/app" element={<App />} />
+      </Routes>
     </Router>
   );
 };
