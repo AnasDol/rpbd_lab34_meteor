@@ -10,25 +10,57 @@ import { Accounts } from 'meteor/accounts-base';
 import '/imports/api/methods.js';
 import '/imports/api/publications.js';
 
-Accounts.config({
-  forbidClientAccountCreation: true, // Disable client-side account creation
-});
+// Accounts.config({
+//   forbidClientAccountCreation: true, // Disable client-side account creation
+// });
 
 Meteor.startup(async () => {
   // Create an admin user
   const adminUsername = 'admin';
   const adminPassword = 'adminPassword';
 
+  // Create the admin user if not exists
   if (!Meteor.users.findOne({ username: adminUsername })) {
-
     Roles.createRole('admin');
-
     const adminUserId = Accounts.createUser({
       username: adminUsername,
       password: adminPassword,
     });
-
     Roles.addUsersToRoles(adminUserId, 'admin');
+  }
+
+  // Create the 'user' role if not exists
+  const allRoles = Roles.getAllRoles().fetch();
+  const userRoleExists = allRoles.some(role => role.name === 'user');
+
+  if (!userRoleExists) {
+    //Roles.createRole('user');
+  }
+  // Create a function to dynamically create users
+  const createDynamicUser = (username, password, roles) => {
+    // Check if the user already exists
+    if (!Meteor.users.findOne({ username })) {
+      const userId = Accounts.createUser({
+        username,
+        password,
+      });
+
+      // Assign roles to the new user
+      Roles.addUsersToRoles(userId, roles);
+      console.log(`User '${username}' created successfully with roles: ${roles.join(', ')}`);
+    } else {
+      console.log(`User '${username}' already exists.`);
+    }
+  };
+
+  // Example: Create a dynamic user
+  createDynamicUser('tetetet', '1234', ['user']);
+
+  // Ensure that the admin has the 'admin' role
+  const adminUser = Meteor.users.findOne({ username: adminUsername });
+  if (adminUser && !Roles.userIsInRole(adminUser._id, 'admin')) {
+    Roles.addUsersToRoles(adminUser._id, 'admin');
+    console.log(`Admin user '${adminUsername}' now has the 'admin' role.`);
   }
 
 

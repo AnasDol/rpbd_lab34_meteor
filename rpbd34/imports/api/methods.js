@@ -6,13 +6,51 @@ import { Clients } from './clients';
 import { Roles } from 'meteor/alanning:roles';
 
 Meteor.methods({
-  'users.addRole'(userId, role) {
+  'users.add'(username, password, roles) {
+    // Check if the current user has the 'admin' role
     if (!this.userId || !Roles.userIsInRole(this.userId, 'admin')) {
-      throw new Meteor.Error('not-authorized', 'You are not authorized to add roles.');
+      throw new Meteor.Error('not-authorized', 'You are not authorized to add users.');
     }
 
-    Roles.addUsersToRoles(userId, role);
+    // Validate input parameters
+    check(username, String);
+    check(password, String);
+    check(roles, Array);
+
+    // Create the new user
+    const userId = Accounts.createUser({
+      username,
+      password,
+    });
+
+    // Assign roles to the new user
+    Roles.addUsersToRoles(userId, roles);
+
+    return userId;
   },
+  'users.addRole'(userId, role) {
+    console.log(this.userId);
+    console.log(Roles.userIsInRole(this.userId, 'admin'));
+    if (!this.userId || !Roles.userIsInRole(this.userId, 'admin')) {
+      console.error('Not authorized to add roles:', this.userId);
+      throw new Meteor.Error('not-authorized', 'You are not authorized to add roles.');
+    }
+    Roles.addUsersToRoles(userId, role);
+    console.log(`Role '${role}' added to user ID '${userId}' by admin.`);
+  },
+  'users.remove'(userId) {
+    // Check if the calling user is authorized to remove users (admin)
+    if (!this.userId || !Roles.userIsInRole(this.userId, 'admin')) {
+      throw new Meteor.Error('not-authorized', 'You are not authorized to remove users.');
+    }
+    check(userId, String);
+    // Perform the user removal
+    Meteor.users.remove(userId);
+  },
+
+
+
+
     'tasks.insert'(text) {
       Tasks.insert({
         text,

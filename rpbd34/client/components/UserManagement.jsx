@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
+import { useTracker } from 'meteor/react-meteor-data';
 
 const UserManagement = () => {
   const [userId, setUserId] = useState('');
   const [role, setRole] = useState('');
+
+  console.log(Meteor.userId());
 
   const handleAddRole = () => {
     Meteor.call('users.addRole', userId, role, (error) => {

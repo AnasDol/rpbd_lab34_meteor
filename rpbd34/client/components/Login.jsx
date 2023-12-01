@@ -5,6 +5,7 @@ import { Navigate } from 'react-router-dom';
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoggedIn, setLoggedIn] = useState(false);
 
   const handleLogin = () => {
     Meteor.loginWithPassword(username, password, (error) => {
@@ -12,9 +13,15 @@ const Login = () => {
         console.error(error.reason);
       } else {
         console.log('Logged in successfully!');
+        setLoggedIn(true); // Set the state to indicate successful login
       }
     });
   };
+
+
+  if (isLoggedIn) {
+    return <Navigate to="/app" />;
+  }
 
   return (
     <div>
