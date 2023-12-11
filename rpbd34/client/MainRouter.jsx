@@ -21,7 +21,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import App from './App';
 import Login from './components/Login';
 import BreedList from '../imports/ui/BreedList';
-import AdminPanel from '../imports/ui/AdminPanel';
+import AdminPanel from './AdminPanel';
 import UserList from '../imports/ui/UserList';
 
 const MainRouter = () => {

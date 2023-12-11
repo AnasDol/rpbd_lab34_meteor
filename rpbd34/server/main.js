@@ -10,11 +10,12 @@ import { Accounts } from 'meteor/accounts-base';
 import '/imports/api/methods.js';
 import '/imports/api/publications.js';
 
-// Accounts.config({
-//   forbidClientAccountCreation: true, // Disable client-side account creation
-// });
-
 Meteor.startup(async () => {
+
+  Accounts.config({
+    forbidClientAccountCreation: false, // Allow clients to create accounts
+  });
+
   // Create an admin user
   const adminUsername = 'admin';
   const adminPassword = 'adminPassword';
