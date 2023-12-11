@@ -22,6 +22,7 @@ import App from './App';
 import Login from './components/Login';
 import BreedList from '../imports/ui/BreedList';
 import AdminPanel from '../imports/ui/AdminPanel';
+import UserList from '../imports/ui/UserList';
 
 const MainRouter = () => {
   return (
@@ -31,6 +32,7 @@ const MainRouter = () => {
         <Route path="/" element={<BreedList />} />
         <Route path="/app" element={<App />} />
         <Route path="/admin" element={<AdminPanel />} />
+        <Route path="/userlist" element={<UserList />} />
       </Routes>
     </Router>
   );

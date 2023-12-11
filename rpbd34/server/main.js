@@ -63,6 +63,14 @@ Meteor.startup(async () => {
     console.log(`Admin user '${adminUsername}' now has the 'admin' role.`);
   }
 
+  Meteor.publish('allUsers', function () {
+    if (this.userId) {
+      return Meteor.users.find({}, { fields: { username: 1, emails: 1, profile: 1 } });
+    } else {
+      this.ready();
+    }
+  });
+
 
 
   if (Tasks.find().count() === 0) {

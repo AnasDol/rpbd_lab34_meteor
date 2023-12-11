@@ -7,7 +7,14 @@ const AdminPanel = () => {
     const [newPassword, setNewPassword] = useState('');
     const [newRoles, setNewRoles] = useState('');
   
-    const users = useTracker(() => Meteor.users.find().fetch());
+    //const users = useTracker(() => Meteor.users.find().fetch());
+
+    Meteor.subscribe('allUsers');
+
+    Tracker.autorun(function () {
+      var users = Meteor.users.find().fetch();
+      console.log(users);
+    });
   
     const handleDeleteUser = (userId) => {
       Meteor.call('users.remove', userId, (error) => {
