@@ -7,27 +7,36 @@ const AdminPanel = () => {
 
   const navigate = useNavigate();
 
-  //useEffect(() => {
+ useEffect(() => {
 
     const authToken = localStorage.getItem('authToken');
 
     if (!authToken) {
       navigate('/login');
+      return;
     } 
+
     else {
-      Meteor.call('validateAuthToken', authToken, (error, isValid) => {
+      Meteor.call('validateAuthTokenAdmin', authToken, (error, isValid) => {
         if (error || !isValid) {
           console.error('Invalid token or authentication error');
           navigate('/login');
+          return;
         }
       });
     }
-  //}, [navigate]);
+  }, [navigate]);
 
   const handleLogout = () => {
     Meteor.logout((error) => {
       if (error) {
         console.error('Logout error:', error.reason);
+      } else {
+        // Remove the authToken from localStorage
+        localStorage.removeItem('authToken');
+  
+        // Redirect to the home page after successful logout
+        navigate('/login');
       }
     });
   };

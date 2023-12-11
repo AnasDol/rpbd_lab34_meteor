@@ -6,12 +6,13 @@ import { Clients } from './clients';
 import { Roles } from 'meteor/alanning:roles';
 
 Meteor.methods({
-  validateAuthToken: function (token) {
-    // Perform your token validation logic here
-    // For example, check if the token is valid and corresponds to an active user
+  validateAuthTokenAdmin: function (token) {
     const user = Meteor.users.findOne({ _id: token });
-
-    // Return a boolean indicating whether the token is valid
+    const isAdmin = user.username == 'admin';
+    return !!user && isAdmin;
+  },
+  validateAuthToken: function (token) {
+    const user = Meteor.users.findOne({ _id: token });
     return !!user;
   },
   'loginUser' (username, password) {
