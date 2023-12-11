@@ -23,6 +23,7 @@ import Login from './components/Login';
 import BreedList from '../imports/ui/BreedList';
 import AdminPanel from './AdminPanel';
 import UserList from '../imports/ui/UserList';
+import AddUserForm from '../imports/ui/AddUserForm';
 
 const MainRouter = () => {
   return (
@@ -33,6 +34,7 @@ const MainRouter = () => {
         <Route path="/app" element={<App />} />
         <Route path="/admin" element={<AdminPanel />} />
         <Route path="/userlist" element={<UserList />} />
+        <Route path="/adduserform" element={<AddUserForm />} />
       </Routes>
     </Router>
   );

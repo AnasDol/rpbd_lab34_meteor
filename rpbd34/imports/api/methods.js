@@ -6,6 +6,18 @@ import { Clients } from './clients';
 import { Roles } from 'meteor/alanning:roles';
 
 Meteor.methods({
+  'users.create': function ({ username, password }) {
+    // Perform any additional validation or checks here
+
+    // Create a new user with the 'user' role
+    const newUserId = Accounts.createUser({
+      username,
+      password,
+      roles: ['user'],
+    });
+
+    return newUserId;
+  },
   validateAuthTokenAdmin: function (token) {
     const user = Meteor.users.findOne({ _id: token });
     const isAdmin = user.username == 'admin';
@@ -59,14 +71,25 @@ Meteor.methods({
     Roles.addUsersToRoles(userId, role);
     console.log(`Role '${role}' added to user ID '${userId}' by admin.`);
   },
-  'users.remove'(userId) {
-    // Check if the calling user is authorized to remove users (admin)
-    if (!this.userId || !Roles.userIsInRole(this.userId, 'admin')) {
-      throw new Meteor.Error('not-authorized', 'You are not authorized to remove users.');
+
+
+  'users.remove': function (authToken, userIdToRemove) {
+    // Validate that the current user is an admin
+    const isAdmin = Meteor.call('validateAuthTokenAdmin', authToken);
+
+    if (!isAdmin) {
+      throw new Meteor.Error('not-authorized', 'Only admins can remove users.');
     }
-    check(userId, String);
-    // Perform the user removal
-    Meteor.users.remove(userId);
+
+    // Find the user by ID and remove them
+    const userToRemove = Meteor.users.findOne({ _id: userIdToRemove });
+
+    if (!userToRemove) {
+      throw new Meteor.Error('user-not-found', 'User not found.');
+    }
+
+    Meteor.users.remove({ _id: userToRemove._id });
+    return true; // Indicate successful removal
   },
 
 

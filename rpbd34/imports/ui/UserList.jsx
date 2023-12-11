@@ -28,16 +28,29 @@ const UserList = () => {
   }, []);
 
   const handleDeleteUser = () => {
-    if (selectedUser && selectedUser.username !== 'admin') {
-      Meteor.call('users.remove', selectedUser._id, (error, result) => {
-        if (error) {
-          console.error('Error deleting user:', error.reason);
-        } else {
-          console.log('User deleted successfully');
-          setSelectedUser(null);
-        }
-      });
+    const authToken = localStorage.getItem('authToken');
+
+    if (!authToken) {
+      console.error('Auth token not found.');
+      return;
     }
+
+    if (!selectedUser) {
+      console.error('No user selected for deletion.');
+      return;
+    }
+
+    Meteor.call('users.remove', authToken, selectedUser._id, (error, result) => {
+      if (error) {
+        console.error('Error removing user:', error.reason);
+      } else {
+        console.log('User removed successfully.');
+        // Handle any additional logic after successful removal
+
+        // Clear the selected user after successful removal
+        setSelectedUser(null);
+      }
+    });
   };
 
   return (

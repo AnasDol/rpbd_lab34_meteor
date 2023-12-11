@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../../imports/ui/styles.css'; // Import the styles
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -24,7 +25,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="login-container"> {/* Apply the container style */}
       <h2>Login</h2>
       <input
         type="text"
@@ -36,7 +37,9 @@ const Login = () => {
         placeholder="Password"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button onClick={handleLogin}>Login</button>
+      <button className="login-button" onClick={handleLogin}>
+        Login
+      </button>
     </div>
   );
 };
