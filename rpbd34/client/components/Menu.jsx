@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../imports/ui/styles.css';
+import '../../imports/ui/styles.css';
 
 import { useNavigate } from 'react-router-dom';
 import { useTracker } from 'meteor/react-meteor-data';
@@ -26,9 +26,13 @@ const Menu = ({ setActiveTab }) => {
         console.error('Logout error:', error.reason);
       } else {
         localStorage.removeItem('authToken');
-        navigate('/login');
+        //navigate('/login');
       }
     });
+  };
+
+  const handleLogin = () => {
+    navigate('/login');
   };
 
   const user = useTracker(() => Meteor.user());
@@ -43,9 +47,6 @@ const Menu = ({ setActiveTab }) => {
         <button className="menu-button" onClick={handleClientListClick}>
           Клиенты
         </button>
-        <button className="menu-button" onClick={handleTaskListClick}>
-          Task List
-        </button>
       </div>
       <div className="right-buttons">
         {isAuthenticated && (
@@ -57,9 +58,9 @@ const Menu = ({ setActiveTab }) => {
           </div>
         )}
         {!isAuthenticated && (
-          <Link to="/login" className="menu-button">
-            Войти
-          </Link>
+          <button className="login-button" onClick={handleLogin}>
+          Войти
+        </button>
         )}
       </div>
     </div>

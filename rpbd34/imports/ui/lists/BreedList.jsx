@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Meteor } from 'meteor/meteor';
-import './styles.css';
-import AddBreedForm from './AddBreedForm';
+import '../styles.css';
+import AddBreedForm from '../forms/AddBreedForm';
 
 const BreedList = () => {
   const [breeds, setBreeds] = useState([]);

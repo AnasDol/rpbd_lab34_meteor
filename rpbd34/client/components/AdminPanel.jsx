@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useNavigate } from 'react-router-dom';
-import UserList from '../imports/ui/UserList';
-import AddUserForm from '../imports/ui/AddUserForm';
+import UserList from '../../imports/ui/lists/UserList';
+import AddUserForm from '../../imports/ui/forms/AddUserForm';
 
 const AdminPanel = () => {
   const navigate = useNavigate();

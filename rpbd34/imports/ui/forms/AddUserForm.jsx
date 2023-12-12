@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
-import './styles.css';
+import '../styles.css';
 
 const AddUserForm = ({ onClose }) => {
   const [username, setUsername] = useState('');

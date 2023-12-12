@@ -1,8 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import { Tasks } from './tasks';
-import { Breeds } from './breeds';
-import { Clients } from './clients';
+import { Breeds } from './collections/breeds';
+import { Clients } from './collections/clients';
 import { Roles } from 'meteor/alanning:roles';
 
 Meteor.methods({
@@ -93,17 +92,6 @@ Meteor.methods({
   },
 
 
-
-
-    'tasks.insert'(text) {
-      Tasks.insert({
-        text,
-        createdAt: new Date(),
-      });
-    },
-    'tasks.get'() {
-      return Tasks.find().fetch();
-    },
     'breeds.get'() {
         return Breeds.find().fetch();
     },

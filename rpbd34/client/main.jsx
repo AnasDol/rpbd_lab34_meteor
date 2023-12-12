@@ -29,7 +29,7 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { render } from 'react-dom';
-import MainRouter from './MainRouter';
+import MainRouter from './components/MainRouter';
 
 Meteor.startup(() => {
   render(<MainRouter />, document.getElementById('app'));

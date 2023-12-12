@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './styles.css';
+import '../styles.css';
 
 const AddBreedForm = ({ onSubmit, breed, mode }) => {
   const [name, setName] = useState('');

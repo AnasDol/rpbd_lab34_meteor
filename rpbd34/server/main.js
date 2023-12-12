@@ -1,14 +1,11 @@
 import { Meteor } from 'meteor/meteor';
-import { LinksCollection } from '/imports/api/links';
 import { Roles } from 'meteor/alanning:roles'; // Add this import
 
-import { Tasks } from '../imports/api/tasks';
-import { Breeds } from '../imports/api/breeds';
-import { Clients } from '../imports/api/clients';
+import { Breeds } from '../imports/api/collections/breeds';
+import { Clients } from '../imports/api/collections/clients';
 
 import { Accounts } from 'meteor/accounts-base';
 import '/imports/api/methods.js';
-import '/imports/api/publications.js';
 
 Meteor.startup(async () => {
 
@@ -71,15 +68,6 @@ Meteor.startup(async () => {
       this.ready();
     }
   });
-
-
-
-  if (Tasks.find().count() === 0) {
-    // Если коллекция пуста, добавляем начальные элементы
-    Tasks.insert({ text: 'Сделать что-то важное' });
-    Tasks.insert({ text: 'Завершить проект' });
-    Tasks.insert({ text: 'Подготовить отчет' });
-  }
 
   // Проверка, пуста ли коллекция breeds
   if (Breeds.find().count() === 0) {
