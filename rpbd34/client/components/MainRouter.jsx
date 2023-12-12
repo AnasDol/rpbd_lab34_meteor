@@ -11,6 +11,7 @@ import PositionList from '../../imports/ui/lists/PositionList';
 import ExhibitionList from '../../imports/ui/lists/ExhibitionList';
 import AddEmployeeForm from '../../imports/ui/forms/AddEmployeeForm';
 import EmployeeList from '../../imports/ui/lists/EmployeeList';
+import RequestList from '../../imports/ui/lists/RequestList';
 
 const MainRouter = () => {
   const [activeTab, setActiveTab] = useState('breedList');
@@ -28,6 +29,7 @@ const MainRouter = () => {
             {activeTab === 'positionList' && <PositionList />}
             {activeTab === 'exhibitionList' && <ExhibitionList />}
             {activeTab === 'employeeList' && <EmployeeList />}
+            {activeTab === 'requestList' && <RequestList />}
           </>
           }
           />

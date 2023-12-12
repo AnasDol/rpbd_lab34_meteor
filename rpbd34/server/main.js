@@ -9,6 +9,7 @@ import '/imports/api/methods.js';
 import '/imports/api/methods/positionMethods.js';
 import '/imports/api/methods/exhibitionMethods.js';
 import '/imports/api/methods/employeeMethods.js';
+import '/imports/api/methods/requestMethods.js';
 
 Meteor.startup(async () => {
 
