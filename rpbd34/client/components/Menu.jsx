@@ -20,6 +20,10 @@ const Menu = ({ setActiveTab }) => {
     setActiveTab('positionList');
   };
 
+  const handleExhibitionListClick = () => {
+    setActiveTab('exhibitionList');
+  };
+
   const handleLogout = () => {
     Meteor.logout((error) => {
       if (error) {
@@ -49,6 +53,9 @@ const Menu = ({ setActiveTab }) => {
         </button>
         <button className="menu-button" onClick={handlePositionListClick}>
           Позиции
+        </button>
+        <button className="menu-button" onClick={handleExhibitionListClick}>
+          Выставки
         </button>
       </div>
       <div className="right-buttons">

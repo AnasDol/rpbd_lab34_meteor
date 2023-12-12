@@ -79,6 +79,27 @@ thead th {
     background-color: #45a049;
 }
 
+.exhibitions-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.exhibitions-table {
+  width: 600px;
+  margin-bottom: 20px;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.exhibitions-table th,
+.exhibitions-table td {
+  text-align: center;
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+
 .addForm {
     margin-top: 20px;
     display: none;

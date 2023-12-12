@@ -1,14 +1,14 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import { Positions as Records } from '../collections/positions';
+import { Exhibitions as Records } from '../collections/exhibitions';
 
 Meteor.methods({
 
-    'positions.get'() {
+    'exhibitions.get'() {
         return Records.find().fetch();
     },
 
-    'positions.insert': function (authToken, data) {
+    'exhibitions.insert': function (authToken, data) {
         const isUser = Meteor.call('validateAuthToken', authToken);
         if (!isUser) {
           throw new Meteor.Error('not-authorized', 'Only authorized users can insert records.');
@@ -17,7 +17,7 @@ Meteor.methods({
         Records.insert(data);
     },
 
-    'positions.update' : function (authToken, idToUpdate, data) {
+    'exhibitions.update' : function (authToken, idToUpdate, data) {
         const isUser = Meteor.call('validateAuthToken', authToken);
         if (!isUser) {
           throw new Meteor.Error('not-authorized', 'Only authorized users can update records.');
@@ -31,7 +31,7 @@ Meteor.methods({
         Records.update(idToUpdate, { $set: data });
     },
 
-    'positions.remove': function (authToken, idToRemove) {
+    'exhibitions.remove': function (authToken, idToRemove) {
         const isUser = Meteor.call('validateAuthToken', authToken);
         if (!isUser) {
           throw new Meteor.Error('not-authorized', 'Only authorized users can remove records.');
