@@ -7,6 +7,7 @@ import BreedList from '../../imports/ui/lists/BreedList';
 import ClientList from '../../imports/ui/lists/ClientList';
 import AddUserForm from '../../imports/ui/forms/AddUserForm';
 import Menu from './Menu';
+import PositionList from '../../imports/ui/lists/PositionList';
 
 const MainRouter = () => {
   const [activeTab, setActiveTab] = useState('breedList');
@@ -21,6 +22,7 @@ const MainRouter = () => {
             <Menu setActiveTab={setActiveTab} />
             {activeTab === 'breedList' && <BreedList />}
             {activeTab === 'clientList' && <ClientList />}
+            {activeTab === 'positionList' && <PositionList />}
           </>
           }
           />

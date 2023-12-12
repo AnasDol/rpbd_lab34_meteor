@@ -16,8 +16,8 @@ const Menu = ({ setActiveTab }) => {
     setActiveTab('clientList');
   };
 
-  const handleTaskListClick = () => {
-    setActiveTab('taskList');
+  const handlePositionListClick = () => {
+    setActiveTab('positionList');
   };
 
   const handleLogout = () => {
@@ -46,6 +46,9 @@ const Menu = ({ setActiveTab }) => {
         </button>
         <button className="menu-button" onClick={handleClientListClick}>
           Клиенты
+        </button>
+        <button className="menu-button" onClick={handlePositionListClick}>
+          Позиции
         </button>
       </div>
       <div className="right-buttons">
