@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Meteor } from 'meteor/meteor';
+import '../styles.css';
 
 const AddEmployeeForm = ({ onSubmit, employee, mode }) => {
   const [positions, setPositions] = useState([]);
