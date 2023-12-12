@@ -7,7 +7,7 @@ const AddEmployeeForm = ({ onSubmit, employee, mode }) => {
   const [firstName, setFirstName] = useState('');
   const [patronymic, setPatronymic] = useState('');
   const [address, setAddress] = useState('');
-  const [positionId, setPositionId] = useState('');
+  const [selectedPosition, setSelectedPosition] = useState(null); // Updated state
   const [salary, setSalary] = useState('');
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const AddEmployeeForm = ({ onSubmit, employee, mode }) => {
       setFirstName(employee.firstName || '');
       setPatronymic(employee.patronymic || '');
       setAddress(employee.address || '');
-      setPositionId(employee.positionId || '');
+      setSelectedPosition(employee.position || null); // Updated state
       setSalary(employee.salary || '');
     }
   }, [mode, employee]);
@@ -38,7 +38,7 @@ const AddEmployeeForm = ({ onSubmit, employee, mode }) => {
       firstName,
       patronymic,
       address,
-      positionId,
+      position: selectedPosition, // Updated property
       salary,
     };
 
@@ -82,8 +82,12 @@ const AddEmployeeForm = ({ onSubmit, employee, mode }) => {
       <label>
         Position:
         <select
-          value={positionId}
-          onChange={(e) => setPositionId(e.target.value)}
+          value={selectedPosition ? selectedPosition._id : ''} // Updated value
+          onChange={(e) => {
+            const selectedPositionId = e.target.value;
+            const positionObject = positions.find(position => position._id === selectedPositionId);
+            setSelectedPosition(positionObject);
+          }}
         >
           <option value="">Select Position</option>
           {positions.map((position) => (
