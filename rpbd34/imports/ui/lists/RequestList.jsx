@@ -128,10 +128,10 @@ const RequestList = () => {
                 className={selectedRequest && selectedRequest._id === request._id ? 'selected-row' : ''}
               >
                 <td>{index + 1}</td>
-                <td>{request.client.name}</td>
-                <td>{request.breed.name}</td>
+                <td>{request.client ? request.client.name : ''}</td>
+                <td>{request.breed ? request.breed.name : ''}</td>
                 <td>{request.gender}</td>
-                <td>{request.date}</td>
+                <td>{request.date instanceof Date ? request.date.toISOString().split('T')[0] : ''}</td>
               </tr>
             ))}
           </tbody>

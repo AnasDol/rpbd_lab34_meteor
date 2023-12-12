@@ -34,6 +34,19 @@ const AddRequestForm = ({ onSubmit, request, mode }) => {
     }
   }, [mode, request]);
 
+  const formatDate = (inputDate) => {
+    const dateObject = new Date(inputDate);
+    const day = dateObject.getDate().toString().padStart(2, '0');
+    const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+    const year = dateObject.getFullYear();
+    return `${day}.${month}.${year}`;
+  };
+
+  const parseDate = (inputDate) => {
+    const [day, month, year] = inputDate.split('.');
+    return new Date(`${year}-${month}-${day}`);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Do any other form validation if needed
@@ -42,7 +55,7 @@ const AddRequestForm = ({ onSubmit, request, mode }) => {
       client: selectedClient,
       breed: selectedBreed,
       gender,
-      date,
+      date: parseDate(date)
     };
 
     onSubmit(requestData);
@@ -97,7 +110,7 @@ const AddRequestForm = ({ onSubmit, request, mode }) => {
       <label>
         Date:
         <input
-          type="text"
+          type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
         />
