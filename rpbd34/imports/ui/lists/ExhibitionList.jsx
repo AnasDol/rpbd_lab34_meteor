@@ -129,7 +129,7 @@ const ExhibitionList = () => {
                 <td>{index + 1}</td>
                 <td>{exhibition.name}</td>
                 <td>{exhibition.address}</td>
-                <td>{exhibition.date}</td>
+                <td>{exhibition.date instanceof Date ? exhibition.date.toISOString().split('T')[0] : ''}</td>
               </tr>
             ))}
           </tbody>

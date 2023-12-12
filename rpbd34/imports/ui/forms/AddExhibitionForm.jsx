@@ -11,15 +11,28 @@ const AddExhibitionForm = ({ onSubmit, exhibition, mode }) => {
       // If in update mode and exhibition is provided, set the values from the selected exhibition
       setName(exhibition.name || '');
       setAddress(exhibition.address || '');
-      setDate(exhibition.date || '');
+      setDate(formatDate(exhibition.date) || '');
     }
   }, [mode, exhibition]);
+
+  const formatDate = (inputDate) => {
+    const dateObject = new Date(inputDate);
+    const day = dateObject.getDate().toString().padStart(2, '0');
+    const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+    const year = dateObject.getFullYear();
+    return `${day}.${month}.${year}`;
+  };
+
+  const parseDate = (inputDate) => {
+    const [day, month, year] = inputDate.split('.');
+    return new Date(`${year}-${month}-${day}`);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Do any other form validation if needed
 
-    const exhibitionData = { name, address, date };
+    const exhibitionData = { name, address, date: parseDate(date) };
     onSubmit(exhibitionData);
   };
 
@@ -44,7 +57,7 @@ const AddExhibitionForm = ({ onSubmit, exhibition, mode }) => {
       <label>
         Date:
         <input
-          type="text"
+          type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
         />
