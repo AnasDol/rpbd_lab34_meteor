@@ -109,10 +109,10 @@ const BreedList = () => {
   };
 
   return (
-    <div className="breeds-container">
+    <div className="collection-container">
       <h2>Breed List</h2>
       <div className="table-container">
-        <table className="breeds-table">
+        <table className="collection-table">
           <thead>
             <tr>
               <th style={{ width: '50px' }}>#</th>

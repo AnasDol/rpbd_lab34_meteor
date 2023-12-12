@@ -116,10 +116,10 @@ const EmployeeList = () => {
   };
 
   return (
-    <div className="employees-container">
+    <div className="collection-container">
       <h2>Employee List</h2>
       <div className="table-container">
-        <table className="employees-table">
+        <table className="collection-table">
           <thead>
             <tr>
               <th style={{ width: '50px' }}>#</th>

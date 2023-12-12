@@ -109,10 +109,10 @@ const ClientList = () => {
   };
 
   return (
-    <div className="clients-container">
+    <div className="collection-container">
       <h2>Clients List</h2>
       <div className="table-container">
-        <table className="clients-table">
+        <table className="collection-table">
           <thead>
             <tr>
               <th style={{ width: '50px' }}>#</th>

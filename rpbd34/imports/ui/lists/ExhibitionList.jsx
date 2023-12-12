@@ -107,10 +107,10 @@ const ExhibitionList = () => {
   };
 
   return (
-    <div className="exhibitions-container">
+    <div className="collection-container">
       <h2>Exhibition List</h2>
       <div className="table-container">
-        <table className="exhibitions-table">
+        <table className="collection-table">
           <thead>
             <tr>
               <th style={{ width: '50px' }}>#</th>
