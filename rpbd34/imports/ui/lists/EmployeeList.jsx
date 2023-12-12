@@ -4,13 +4,25 @@ import '../styles.css';
 import AddEmployeeForm from '../forms/AddEmployeeForm';
 
 const EmployeeList = () => {
-  const [employees, setEmployees] = useState([]);
-  const [selectedEmployee, setSelectedEmployee] = useState(null);
-  const [showAddForm, setShowAddForm] = useState(false);
-  const [formMode, setFormMode] = useState('add'); // 'add' or 'update'
-
-  const authToken = localStorage.getItem('authToken');
-
+    const [employees, setEmployees] = useState([]);
+    const [selectedEmployee, setSelectedEmployee] = useState(null);
+    const [showAddForm, setShowAddForm] = useState(false);
+    const [formMode, setFormMode] = useState('add'); // 'add' or 'update'
+  
+    const authToken = localStorage.getItem('authToken');
+  
+    useEffect(() => {
+      Meteor.call('employees.get', (error, result) => {
+        if (!error) {
+          setEmployees(result);
+        }
+      });
+    }, []);
+  
+    const handleEmployeeClick = (employee) => {
+      setSelectedEmployee(selectedEmployee === employee ? null : employee);
+    };
+  
   useEffect(() => {
     Meteor.call('employees.get', (error, result) => {
       if (!error) {
@@ -19,9 +31,6 @@ const EmployeeList = () => {
     });
   }, []);
 
-  const handleEmployeeClick = (employee) => {
-    setSelectedEmployee(selectedEmployee === employee ? null : employee);
-  };
 
   const handleUpdateClick = () => {
     if (selectedEmployee) {
@@ -134,7 +143,7 @@ const EmployeeList = () => {
                 <td>{employee.firstName}</td>
                 <td>{employee.patronymic}</td>
                 <td>{employee.address}</td>
-                <td>{employee.positionId}</td>
+                <td>{employee.position.name}</td>
                 <td>{employee.salary}</td>
               </tr>
             ))}

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { Meteor } from 'meteor/meteor';
 
 const AddEmployeeForm = ({ onSubmit, employee, mode }) => {
-    const [positions, setPositions] = useState([]);
+  const [positions, setPositions] = useState([]);
   const [lastName, setLastName] = useState('');
   const [firstName, setFirstName] = useState('');
   const [patronymic, setPatronymic] = useState('');
@@ -10,8 +11,15 @@ const AddEmployeeForm = ({ onSubmit, employee, mode }) => {
   const [salary, setSalary] = useState('');
 
   useEffect(() => {
+    // Fetch positions when the component mounts
+    Meteor.call('positions.get', (error, result) => {
+      if (!error) {
+        setPositions(result);
+      }
+    });
+
+    // If in update mode and employee is provided, set the values from the selected employee
     if (mode === 'update' && employee) {
-      // If in update mode and employee is provided, set the values from the selected employee
       setLastName(employee.lastName || '');
       setFirstName(employee.firstName || '');
       setPatronymic(employee.patronymic || '');
