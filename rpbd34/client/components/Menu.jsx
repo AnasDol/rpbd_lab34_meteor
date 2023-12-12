@@ -24,6 +24,10 @@ const Menu = ({ setActiveTab }) => {
     setActiveTab('exhibitionList');
   };
 
+  const handleEmployeeListClick = () => {
+    setActiveTab('employeeList');
+  };
+
   const handleLogout = () => {
     Meteor.logout((error) => {
       if (error) {
@@ -56,6 +60,9 @@ const Menu = ({ setActiveTab }) => {
         </button>
         <button className="menu-button" onClick={handleExhibitionListClick}>
           Выставки
+        </button>
+        <button className="menu-button" onClick={handleEmployeeListClick}>
+          Сотрудники
         </button>
       </div>
       <div className="right-buttons">

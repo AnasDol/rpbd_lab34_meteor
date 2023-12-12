@@ -9,6 +9,8 @@ import AddUserForm from '../../imports/ui/forms/AddUserForm';
 import Menu from './Menu';
 import PositionList from '../../imports/ui/lists/PositionList';
 import ExhibitionList from '../../imports/ui/lists/ExhibitionList';
+import AddEmployeeForm from '../../imports/ui/forms/AddEmployeeForm';
+import EmployeeList from '../../imports/ui/lists/EmployeeList';
 
 const MainRouter = () => {
   const [activeTab, setActiveTab] = useState('breedList');
@@ -25,11 +27,13 @@ const MainRouter = () => {
             {activeTab === 'clientList' && <ClientList />}
             {activeTab === 'positionList' && <PositionList />}
             {activeTab === 'exhibitionList' && <ExhibitionList />}
+            {activeTab === 'employeeList' && <EmployeeList />}
           </>
           }
           />
         <Route path="/breedList" element={<BreedList />} />
         <Route path="/clientList" element={<ClientList />} />
+        <Route path="/addemployeeform" element={<AddEmployeeForm />} />
         <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<AdminPanel />} />
         <Route path="/userlist" element={<UserList />} />

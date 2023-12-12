@@ -8,6 +8,7 @@ import { Accounts } from 'meteor/accounts-base';
 import '/imports/api/methods.js';
 import '/imports/api/methods/positionMethods.js';
 import '/imports/api/methods/exhibitionMethods.js';
+import '/imports/api/methods/employeeMethods.js';
 
 Meteor.startup(async () => {
 
