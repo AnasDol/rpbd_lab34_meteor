@@ -1,5 +1,5 @@
 import React from 'react';
-import './styles.css';
+import '../imports/ui/styles.css';
 
 const Menu = ({ setActiveTab }) => {
   const handleBreedListClick = () => {
