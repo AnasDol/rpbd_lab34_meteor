@@ -4,9 +4,14 @@ import { Animals as Records } from '../collections/animals';
 
 Meteor.methods({
 
-    'animals.get'() {
-        return Records.find().fetch();
-    },
+  'animals.get': function (genderFilter) {
+    const query = genderFilter ? { gender: genderFilter } : {};
+    return Records.find(query).fetch();
+  },
+
+    // 'animals.get'() {
+    //     return Records.find().fetch();
+    // },
 
     'animals.insert': function (authToken, data) {
         const isUser = Meteor.call('validateAuthToken', authToken);

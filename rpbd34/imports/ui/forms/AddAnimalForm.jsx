@@ -41,10 +41,26 @@ const AddAnimalForm = ({ onSubmit, animal, mode }) => {
     });
 
     // Fetch animals for mothers when the component mounts
-    Meteor.call('animals.get', (error, result) => {
+    Meteor.call('animals.get', 'female', (error, result) => {
       if (!error) {
-        setMothers(result);
-        setFathers(result);
+        // If in update mode, exclude the current animal from the mothers list
+        const filteredMothers = mode === 'update' && animal && animal.gender === 'female'
+          ? result.filter(mother => mother._id !== animal._id)
+          : result;
+  
+        setMothers(filteredMothers);
+      }
+    });
+  
+    // Fetch animals for fathers when the component mounts
+    Meteor.call('animals.get', 'male', (error, result) => {
+      if (!error) {
+        // If in update mode, exclude the current animal from the fathers list
+        const filteredFathers = mode === 'update' && animal && animal.gender === 'male'
+          ? result.filter(father => father._id !== animal._id)
+          : result;
+  
+        setFathers(filteredFathers);
       }
     });
 

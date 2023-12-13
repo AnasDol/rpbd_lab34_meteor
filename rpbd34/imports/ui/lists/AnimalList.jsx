@@ -5,6 +5,9 @@ import AddAnimalForm from '../forms/AddAnimalForm';
 
 const AnimalList = () => {
   const [animals, setAnimals] = useState([]);
+  const [clients, setClients] = useState([]);
+  const [employees, setEmployees] = useState([]);
+  const [breeds, setBreeds] = useState([]);
   const [selectedAnimal, setSelectedAnimal] = useState(null);
   const [showAddForm, setShowAddForm] = useState(false);
   const [formMode, setFormMode] = useState('add'); // 'add' or 'update'
@@ -15,6 +18,27 @@ const AnimalList = () => {
     Meteor.call('animals.get', (error, result) => {
       if (!error) {
         setAnimals(result);
+      }
+    });
+
+    // Fetch clients when the component mounts
+    Meteor.call('clients.get', (error, result) => {
+      if (!error) {
+        setClients(result);
+      }
+    });
+
+    // Fetch employees when the component mounts
+    Meteor.call('employees.get', (error, result) => {
+      if (!error) {
+        setEmployees(result);
+      }
+    });
+
+    // Fetch breeds when the component mounts
+    Meteor.call('breeds.get', (error, result) => {
+      if (!error) {
+        setBreeds(result);
       }
     });
   }, []);
@@ -134,10 +158,28 @@ const AnimalList = () => {
                 <td>{animal.name}</td>
                 <td>{animal.age}</td>
                 <td>{animal.gender}</td>
-                <td>{animal.breed ? animal.breed.name : ''}</td>
+                <td>
+                  {animal.breed ? (
+                    breeds.find(breed => breed._id === animal.breed._id)?.name || ''
+                  ) : ''}
+                </td>
                 <td>{animal.appearance}</td>
-                <td>{animal.client ? `${animal.client.lastName} ${animal.client.firstName}` : ''}</td>
-                <td>{animal.employee ? `${animal.employee.lastName} ${animal.employee.firstName}` : ''}</td>
+                <td>
+                  {animal.client ? (
+                    (() => {
+                      const foundClient = clients.find(client => client._id === animal.client._id);
+                      return foundClient ? `${foundClient.firstName} ${foundClient.lastName}` : '';
+                    })()
+                  ) : ''}
+                </td>
+                <td>
+                  {animal.employee ? (
+                    (() => {
+                      const foundEmployee = employees.find(employee => employee._id === animal.employee._id);
+                      return foundEmployee ? `${foundEmployee.firstName} ${foundEmployee.lastName}` : '';
+                    })()
+                  ) : ''}
+                </td>
               </tr>
             ))}
           </tbody>
