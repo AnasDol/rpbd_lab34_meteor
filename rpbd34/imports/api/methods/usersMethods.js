@@ -1,9 +1,24 @@
 import { Meteor } from 'meteor/meteor';
-import { check } from 'meteor/check';
-import { Roles } from 'meteor/alanning:roles';
+import { Accounts } from 'meteor/accounts-base';
 
 Meteor.methods({
+  validateAuthTokenAdmin: function (token) {
+    const user = Meteor.users.findOne({ _id: token });
+    const isAdmin = user?.username === 'admin';
+    return !!user && isAdmin;
+  },
+
+  validateAuthToken: function (token) {
+    const user = Meteor.users.findOne({ _id: token });
+    return !!user;
+  },
+
   'users.create': function ({ username, password }) {
+    // Проверка уникальности имени пользователя
+    if (Meteor.users.findOne({ username })) {
+      throw new Meteor.Error('duplicate-username', 'Username is already taken.');
+    }
+
     const newUserId = Accounts.createUser({
       username,
       password,
@@ -13,73 +28,22 @@ Meteor.methods({
     return newUserId;
   },
 
-  validateAuthTokenAdmin: function (token) {
-    const user = Meteor.users.findOne({ _id: token });
-    const isAdmin = user.username == 'admin';
-    return !!user && isAdmin;
-  },
-
-  validateAuthToken: function (token) {
-    const user = Meteor.users.findOne({ _id: token });
-    return !!user;
-  },
-
-  'loginUser' (username, password) {
-    const user = Meteor.users.findOne({ username });
-
-    if (user && Accounts._checkPassword(user, password)) {
-      // Log the user in and return the authentication token
-      const authToken = Accounts._generateStampedLoginToken();
-      Accounts._insertLoginToken(user._id, authToken);
-      return authToken.token;
-    } else {
-      throw new Meteor.Error('invalid-login', 'Invalid username or password');
-    }
-  },
-
-  'users.add'(username, password, roles) {
-    // Check if the current user has the 'admin' role
-    if (!this.userId || !Roles.userIsInRole(this.userId, 'admin')) {
-      throw new Meteor.Error('not-authorized', 'You are not authorized to add users.');
-    }
-
-    // Validate input parameters
-    check(username, String);
-    check(password, String);
-    check(roles, Array);
-
-    // Create the new user
-    const userId = Accounts.createUser({
-      username,
-      password,
-    });
-
-    // Assign roles to the new user
-    Roles.addUsersToRoles(userId, roles);
-
-    return userId;
-  },
-
-  'users.addRole'(userId, role) {
-    console.log(this.userId);
-    console.log(Roles.userIsInRole(this.userId, 'admin'));
-    if (!this.userId || !Roles.userIsInRole(this.userId, 'admin')) {
-      console.error('Not authorized to add roles:', this.userId);
-      throw new Meteor.Error('not-authorized', 'You are not authorized to add roles.');
-    }
-    Roles.addUsersToRoles(userId, role);
-    console.log(`Role '${role}' added to user ID '${userId}' by admin.`);
-  },
-
   'users.remove': function (authToken, userIdToRemove) {
-    // Validate that the current user is an admin
+    // Проверка, что текущий пользователь — админ
     const isAdmin = Meteor.call('validateAuthTokenAdmin', authToken);
 
     if (!isAdmin) {
       throw new Meteor.Error('not-authorized', 'Only admins can remove users.');
     }
 
-    // Find the user by ID and remove them
+    // Проверка, что пользователь не удаляет сам себя
+    const currentUser = Meteor.users.findOne({ _id: authToken });
+
+    if (currentUser && currentUser._id === userIdToRemove) {
+      throw new Meteor.Error('self-delete', 'Users cannot delete themselves.');
+    }
+
+    // Найти пользователя по ID и удалить его
     const userToRemove = Meteor.users.findOne({ _id: userIdToRemove });
 
     if (!userToRemove) {
@@ -87,7 +51,6 @@ Meteor.methods({
     }
 
     Meteor.users.remove({ _id: userToRemove._id });
-    return true; // Indicate successful removal
+    return true; // Успешное удаление
   },
-
-  });
+});
