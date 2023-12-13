@@ -74,6 +74,7 @@ const AddRequestForm = ({ onSubmit, request, mode }) => {
             const clientObject = clients.find(client => client._id === selectedClientId);
             setSelectedClient(clientObject);
           }}
+          required
         >
           <option value="">Select Client</option>
           {clients.map((client) => (
@@ -92,6 +93,7 @@ const AddRequestForm = ({ onSubmit, request, mode }) => {
             const breedObject = breeds.find(breed => breed._id === selectedBreedId);
             setSelectedBreed(breedObject);
           }}
+          required
         >
           <option value="">Select Breed</option>
           {breeds.map((breed) => (
@@ -106,6 +108,7 @@ const AddRequestForm = ({ onSubmit, request, mode }) => {
         <select
             value={gender}
             onChange={(e) => setGender(e.target.value)}
+            required
         >
             <option value="">Не выбран</option>
             <option value="male">Мужской</option>

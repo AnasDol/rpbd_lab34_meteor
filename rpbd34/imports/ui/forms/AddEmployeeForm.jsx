@@ -54,6 +54,7 @@ const AddEmployeeForm = ({ onSubmit, employee, mode }) => {
           type="text"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
+          required
         />
       </label>
       <label>
@@ -62,6 +63,7 @@ const AddEmployeeForm = ({ onSubmit, employee, mode }) => {
           type="text"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
+          required
         />
       </label>
       <label>
@@ -89,6 +91,7 @@ const AddEmployeeForm = ({ onSubmit, employee, mode }) => {
             const positionObject = positions.find(position => position._id === selectedPositionId);
             setSelectedPosition(positionObject);
           }}
+          required
         >
           <option value="">Select Position</option>
           {positions.map((position) => (

@@ -51,6 +51,7 @@ const AddParticipationForm = ({ onSubmit, participation, selectedAnimal, mode })
             const exhibitionObject = exhibitions.find(exhibition => exhibition._id === selectedExhibitionId);
             setSelectedExhibition(exhibitionObject);
           }}
+          required
         >
           <option value="">Select Exhibition</option>
           {exhibitions.map((exhibition) => (

@@ -26,6 +26,7 @@ const AddPositionForm = ({ onSubmit, position, mode }) => {
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          required
         />
       </label>
       <button type="submit">{mode === 'add' ? 'Добавить запись' : 'Обновить данные'}</button>

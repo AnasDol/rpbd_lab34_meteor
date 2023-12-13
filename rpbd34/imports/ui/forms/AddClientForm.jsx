@@ -33,6 +33,7 @@ const AddClientForm = ({ onSubmit, client, mode }) => {
           type="text"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
+          required
         />
       </label>
       <label>
@@ -41,6 +42,7 @@ const AddClientForm = ({ onSubmit, client, mode }) => {
           type="text"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
+          required
         />
       </label>
       <label>

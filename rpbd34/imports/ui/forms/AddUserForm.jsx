@@ -46,6 +46,7 @@ const AddUserForm = ({ onClose }) => {
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          required
         />
       </label>
       <label>
@@ -54,6 +55,7 @@ const AddUserForm = ({ onClose }) => {
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
       </label>
       <button onClick={handleCreateUser}>Create User</button>

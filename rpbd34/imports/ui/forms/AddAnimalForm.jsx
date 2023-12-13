@@ -107,6 +107,7 @@ const AddAnimalForm = ({ onSubmit, animal, mode }) => {
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          required
         />
       </label>
       <label>
