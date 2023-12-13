@@ -98,7 +98,7 @@ const AddAnimalForm = ({ onSubmit, animal, mode }) => {
   };
 
   return (
-    <form className="AddForm" onSubmit={handleSubmit}>
+    <form className="addForm" onSubmit={handleSubmit}>
       
       
       <label>

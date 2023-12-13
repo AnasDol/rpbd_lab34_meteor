@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-//import './ClientList.css';
+import '../styles.css';
 
 const AddClientForm = ({ onSubmit, client, mode }) => {
   const [lastName, setLastName] = useState('');
@@ -26,7 +26,7 @@ const AddClientForm = ({ onSubmit, client, mode }) => {
   };
 
   return (
-    <form className="AddForm" onSubmit={handleSubmit}>
+    <form className="addForm" onSubmit={handleSubmit}>
       <label>
         Last Name:
         <input

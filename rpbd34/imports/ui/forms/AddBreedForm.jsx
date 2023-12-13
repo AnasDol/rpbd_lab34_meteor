@@ -20,7 +20,7 @@ const AddBreedForm = ({ onSubmit, breed, mode }) => {
   };
 
   return (
-    <form className="AddForm" onSubmit={handleSubmit}>
+    <form className="addForm" onSubmit={handleSubmit}>
       <label>
         Название породы:
         <input

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-//import './AddExhibitionForm.css';
+import '../styles.css';
 
 const AddExhibitionForm = ({ onSubmit, exhibition, mode }) => {
   const [name, setName] = useState('');
@@ -37,7 +37,7 @@ const AddExhibitionForm = ({ onSubmit, exhibition, mode }) => {
   };
 
   return (
-    <form className="AddForm" onSubmit={handleSubmit}>
+    <form className="addForm" onSubmit={handleSubmit}>
       <label>
         Name:
         <input

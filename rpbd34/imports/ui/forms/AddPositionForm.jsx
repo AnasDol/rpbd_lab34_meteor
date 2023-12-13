@@ -19,7 +19,7 @@ const AddPositionForm = ({ onSubmit, position, mode }) => {
   };
 
   return (
-    <form className="AddForm" onSubmit={handleSubmit}>
+    <form className="addForm" onSubmit={handleSubmit}>
       <label>
         Название породы:
         <input

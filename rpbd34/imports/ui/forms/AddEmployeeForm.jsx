@@ -47,7 +47,7 @@ const AddEmployeeForm = ({ onSubmit, employee, mode }) => {
   };
 
   return (
-    <form className="AddForm" onSubmit={handleSubmit}>
+    <form className="addForm" onSubmit={handleSubmit}>
       <label>
         Last Name:
         <input

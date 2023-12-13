@@ -41,7 +41,7 @@ const AddParticipationForm = ({ onSubmit, participation, selectedAnimal, mode })
   };
 
   return (
-    <form className="AddForm" onSubmit={handleSubmit}>
+    <form className="addForm" onSubmit={handleSubmit}>
         <label>
         Выставка:
         <select

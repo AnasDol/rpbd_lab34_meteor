@@ -64,7 +64,7 @@ const AddRequestForm = ({ onSubmit, request, mode }) => {
   };
 
   return (
-    <form className="AddForm" onSubmit={handleSubmit}>
+    <form className="addForm" onSubmit={handleSubmit}>
       <label>
         Client:
         <select

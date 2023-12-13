@@ -200,4 +200,32 @@ thead th {
 .addForm button:hover {
   background-color: #45a049;
 }
+
+.addForm select {
+  padding: 8px;
+  font-size: 14px;
+}
+
+.addForm select,
+.addForm select option {
+  width: 200px; /* Установите ширину селекта по вашему выбору */
+}
+
+.addForm select:hover {
+  border-color: #45a049; /* Измените цвет рамки при наведении */
+}
+
+.addForm select:focus {
+  outline: none; /* Уберите рамку фокуса */
+  border-color: #4caf50; /* Измените цвет рамки при фокусе */
+}
+
+.addForm select option:hover {
+  background-color: #45a049; /* Измените цвет фона при наведении на опцию */
+}
+
+.addForm select option:checked {
+  background-color: #4caf50; /* Измените цвет фона выбранной опции */
+  color: white; /* Измените цвет текста выбранной опции */
+}
   
