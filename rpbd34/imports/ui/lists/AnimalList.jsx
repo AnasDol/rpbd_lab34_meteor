@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Meteor } from 'meteor/meteor';
 import '../styles.css';
 import AddAnimalForm from '../forms/AddAnimalForm';
+import PedigreeTree from './PedigreeTree';
 
 const AnimalList = () => {
   const [animals, setAnimals] = useState([]);
@@ -204,6 +205,13 @@ const AnimalList = () => {
           </div>
         </div>
       )}
+      {selectedAnimal && (
+            <div>
+              <h3>Pedigree Tree</h3>
+              {selectedAnimal.name}
+              <PedigreeTree animal={selectedAnimal} animals={animals} depth={1}/>
+            </div>
+          )}
     </div>
   );
 };
