@@ -154,9 +154,6 @@ const AddAnimalForm = ({ onSubmit, animal, mode }) => {
           onChange={(e) => setAppearance(e.target.value)}
         />
       </label>
-      <button type="submit">
-        {mode === 'add' ? 'Add Animal' : 'Update Animal'}
-      </button>
       <label>
         Client:
         <select
@@ -231,6 +228,9 @@ const AddAnimalForm = ({ onSubmit, animal, mode }) => {
           ))}
         </select>
       </label>
+      <button type="submit">
+        {mode === 'add' ? 'Add Animal' : 'Update Animal'}
+      </button>
     </form>
   );
 };

@@ -12,6 +12,8 @@ const AnimalList = () => {
   const [selectedAnimal, setSelectedAnimal] = useState(null);
   const [showAddForm, setShowAddForm] = useState(false);
   const [formMode, setFormMode] = useState('add'); // 'add' or 'update'
+  const [requests, setRequests] = useState([]);
+  const [selectedRequest, setSelectedRequest] = useState(null);
 
   const authToken = localStorage.getItem('authToken');
 
@@ -42,6 +44,13 @@ const AnimalList = () => {
         setBreeds(result);
       }
     });
+
+    Meteor.call('requests.get', (error, result) => {
+      if (!error) {
+        setRequests(result);
+      }
+    });
+
   }, []);
 
   const handleAnimalClick = (animal) => {
@@ -134,6 +143,17 @@ const AnimalList = () => {
   return (
     <div className="collection-container">
       <h2>Animal List</h2>
+      <div>
+        <label>Select Request:</label>
+        <select onChange={(e) => setSelectedRequest(requests.find(request => request._id === e.target.value))} value={selectedRequest ? selectedRequest._id : ''}>
+          <option value="">All Requests</option>
+          {requests.map((request) => (
+            <option key={request._id} value={request._id}>
+              {`${request.client.lastName} ${request.client.firstName} - ${request.breed?.name} - ${request.gender}`}
+            </option>
+          ))}
+        </select>
+      </div>
       <div className="table-container">
         <table className="collection-table">
           <thead>
@@ -149,7 +169,18 @@ const AnimalList = () => {
             </tr>
           </thead>
           <tbody>
-            {animals.map((animal, index) => (
+          {animals
+            .filter((animal) => {
+              if (!selectedRequest) {
+                return true; // Show all animals if no request is selected
+              }
+              // Show animals that match the selected request's breed and gender
+              return (
+                animal.breed?._id === selectedRequest.breed?._id 
+                && animal.gender === selectedRequest.gender
+              );
+            })
+            .map((animal, index) => (
               <tr
                 key={animal._id}
                 onClick={() => handleAnimalClick(animal)}
