@@ -8,6 +8,11 @@ Meteor.methods({
         return Records.find().fetch();
     },
 
+  'employees.getByName': function (name) {
+    check(name, String);
+    return Records.find({ 'name': name }).fetch();
+  },
+
     'employees.insert': function (authToken, data) {
         const isUser = Meteor.call('validateAuthToken', authToken);
         if (!isUser) {

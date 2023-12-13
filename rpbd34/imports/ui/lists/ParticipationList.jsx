@@ -87,13 +87,6 @@ const ParticipationList = () => {
                   }
                 });
           }
-        //   Meteor.call('participations.get', (error, result) => {
-        //     if (!error) {
-        //       setParticipations(result);
-        //     } else {
-        //       console.error('Error fetching updated participations:', error);
-        //     }
-        //   });
 
           console.log(`Participation with ID ${participationId} deleted successfully!`);
           setSelectedParticipation(null); // Clear the selected participation after deletion
@@ -135,14 +128,6 @@ const ParticipationList = () => {
                               }
                             });
                       }
-                    // Meteor.call('participations.getByAnimal', selectedAnimalId, (error, result) => {
-                    // if (!error) {
-                    //     setParticipations(result);
-                    // } else {
-                    //     console.error('Error fetching participations:', error);
-                    // }
-                    // });
-                    // console.log('Participation inserted successfully!');
                 }
                 });
             } else {
@@ -176,15 +161,6 @@ const ParticipationList = () => {
                         });
                   }
 
-
-
-                // Meteor.call('participations.getByAnimal', selectedAnimalId, (error, result) => {
-                //     if (!error) {
-                //     setParticipations(result);
-                //     } else {
-                //     console.error('Error fetching participations:', error);
-                //     }
-                // });
                 console.log(`Participation with ID ${participationId} updated successfully!`);
                 setSelectedParticipation(null); // Clear the selected participation after update
                 }

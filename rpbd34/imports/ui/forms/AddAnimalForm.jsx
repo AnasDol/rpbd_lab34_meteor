@@ -176,7 +176,7 @@ const AddAnimalForm = ({ onSubmit, animal, mode }) => {
         </select>
       </label>
       <label>
-        Employee:
+        Vet:
         <select
           value={selectedEmployee ? selectedEmployee._id : ''}
           onChange={(e) => {
@@ -186,10 +186,12 @@ const AddAnimalForm = ({ onSubmit, animal, mode }) => {
           }}
         >
           <option value="">Select Employee</option>
-          {employees.map((employee) => (
-            <option key={employee._id} value={employee._id}>
-              {employee.lastName} {employee.firstName}
-            </option>
+            {employees
+              .filter(employee => employee.position.name === 'ветеринар') // Фильтрация по должности ветеринара
+              .map((employee) => (
+                <option key={employee._id} value={employee._id}>
+                  {employee.lastName} {employee.firstName}
+                </option>
           ))}
         </select>
       </label>
