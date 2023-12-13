@@ -9,6 +9,8 @@ const BreedList = () => {
   const [showAddForm, setShowAddForm] = useState(false);
   const [formMode, setFormMode] = useState('add'); // 'add' or 'update'
 
+  const authToken = localStorage.getItem('authToken');
+
   useEffect(() => {
     Meteor.call('breeds.get', (error, result) => {
       if (!error) {
@@ -34,7 +36,7 @@ const BreedList = () => {
     if (selectedBreed) {
       const breedId = selectedBreed._id;
 
-      Meteor.call('breeds.remove', breedId, (error) => {
+      Meteor.call('breeds.remove', authToken, breedId, (error) => {
         if (error) {
           console.error('Error deleting breed:', error);
         } else {
@@ -64,7 +66,7 @@ const BreedList = () => {
   const handleAddBreed = (breedData) => {
 
     if (formMode === 'add') {
-      Meteor.call('breeds.insert', breedData, (error) => {
+      Meteor.call('breeds.insert', authToken, breedData, (error) => {
         if (error) {
           console.error('Error inserting breed:', error);
         } else {
@@ -84,7 +86,7 @@ const BreedList = () => {
 
       if (selectedBreed) {
         const breedId = selectedBreed._id;
-        Meteor.call('breeds.update', breedId, breedData, (error) => {
+        Meteor.call('breeds.update', authToken, breedId, breedData, (error) => {
           if (error) {
             console.error('Error updating breed:', error);
           } else {

@@ -9,6 +9,8 @@ const ClientList = () => {
   const [showAddForm, setShowAddForm] = useState(false);
   const [formMode, setFormMode] = useState('add'); // 'add' or 'update'
 
+  const authToken = localStorage.getItem('authToken');
+
   useEffect(() => {
     Meteor.call('clients.get', (error, result) => {
       if (!error) {
@@ -34,7 +36,7 @@ const ClientList = () => {
     if (selectedClient) {
       const clientId = selectedClient._id;
 
-      Meteor.call('clients.remove', clientId, (error) => {
+      Meteor.call('clients.remove', authToken, clientId, (error) => {
         if (error) {
           console.error('Error deleting client:', error);
         } else {
@@ -64,7 +66,7 @@ const ClientList = () => {
   const handleAddClient = (clientData) => {
 
     if (formMode === 'add') {
-      Meteor.call('clients.insert', clientData, (error) => {
+      Meteor.call('clients.insert', authToken, clientData, (error) => {
         if (error) {
           console.error('Error inserting client:', error);
         } else {
@@ -84,7 +86,7 @@ const ClientList = () => {
 
       if (selectedClient) {
         const clientId = selectedClient._id;
-        Meteor.call('clients.update', clientId, clientData, (error) => {
+        Meteor.call('clients.update', authToken, clientId, clientData, (error) => {
           if (error) {
             console.error('Error updating client:', error);
           } else {

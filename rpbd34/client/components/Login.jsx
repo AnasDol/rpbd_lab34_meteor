@@ -19,7 +19,7 @@ const Login = () => {
         localStorage.setItem('authToken', token);
 
         // After successful login, redirect to the desired page
-        navigate('/admin');
+        navigate('/');
       }
     });
   };

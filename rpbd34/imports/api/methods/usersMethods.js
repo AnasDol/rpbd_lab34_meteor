@@ -1,14 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import { Breeds } from './collections/breeds';
-import { Clients } from './collections/clients';
 import { Roles } from 'meteor/alanning:roles';
 
 Meteor.methods({
   'users.create': function ({ username, password }) {
-    // Perform any additional validation or checks here
-
-    // Create a new user with the 'user' role
     const newUserId = Accounts.createUser({
       username,
       password,
@@ -17,15 +12,18 @@ Meteor.methods({
 
     return newUserId;
   },
+
   validateAuthTokenAdmin: function (token) {
     const user = Meteor.users.findOne({ _id: token });
     const isAdmin = user.username == 'admin';
     return !!user && isAdmin;
   },
+
   validateAuthToken: function (token) {
     const user = Meteor.users.findOne({ _id: token });
     return !!user;
   },
+
   'loginUser' (username, password) {
     const user = Meteor.users.findOne({ username });
 
@@ -38,6 +36,7 @@ Meteor.methods({
       throw new Meteor.Error('invalid-login', 'Invalid username or password');
     }
   },
+
   'users.add'(username, password, roles) {
     // Check if the current user has the 'admin' role
     if (!this.userId || !Roles.userIsInRole(this.userId, 'admin')) {
@@ -60,6 +59,7 @@ Meteor.methods({
 
     return userId;
   },
+
   'users.addRole'(userId, role) {
     console.log(this.userId);
     console.log(Roles.userIsInRole(this.userId, 'admin'));
@@ -70,7 +70,6 @@ Meteor.methods({
     Roles.addUsersToRoles(userId, role);
     console.log(`Role '${role}' added to user ID '${userId}' by admin.`);
   },
-
 
   'users.remove': function (authToken, userIdToRemove) {
     // Validate that the current user is an admin
@@ -90,50 +89,5 @@ Meteor.methods({
     Meteor.users.remove({ _id: userToRemove._id });
     return true; // Indicate successful removal
   },
-
-
-    'breeds.get'() {
-        return Breeds.find().fetch();
-    },
-
-     'breeds.insert'(breedData) {
-      Breeds.insert(breedData);
-    },
-    'breeds.remove'(breedId) {
-      // if (!Meteor.userId()) {
-      //   throw new Meteor.Error('not-authorized', 'You are not authorized to remove breeds.');
-      // }
-      check(breedId, String);
-      Breeds.remove(breedId);
-    },
-    'breeds.update'(breedId, breedData) {
-      check(breedId, String);
-      check(breedData, Object);
-      Breeds.update(breedId, { $set: breedData });
-    },
-
-  'clients.get'() {
-    return Clients.find().fetch();
-  },
-   'clients.insert'(clientData) {
-    Clients.insert(clientData);
-  },
-  'clients.remove'(clientId) {
-    // if (!Meteor.userId()) {
-    //   throw new Meteor.Error('not-authorized', 'You are not authorized to remove breeds.');
-    // }
-    check(clientId, String);
-    Clients.remove(clientId);
-  },
-  'clients.update'(clientId, clientData) {
-    check(clientId, String);
-    check(clientData, Object);
-    Clients.update(clientId, { $set: clientData });
-  },
-
-
-
-
-
 
   });
