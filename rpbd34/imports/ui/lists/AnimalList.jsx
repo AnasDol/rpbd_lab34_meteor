@@ -115,10 +115,12 @@ const AnimalList = () => {
             <tr>
               <th style={{ width: '50px' }}>#</th>
               <th style={{ width: '200px' }}>Name</th>
-              <th style={{ width: '200px' }}>Age</th>
-              <th style={{ width: '200px' }}>Gender</th>
+              <th style={{ width: '100px' }}>Age</th>
+              <th style={{ width: '100px' }}>Gender</th>
               <th style={{ width: '200px' }}>Breed</th>
               <th style={{ width: '200px' }}>Appearance</th>
+              <th style={{ width: '200px' }}>Client</th>
+              <th style={{ width: '200px' }}>Vet</th>
             </tr>
           </thead>
           <tbody>
@@ -134,6 +136,8 @@ const AnimalList = () => {
                 <td>{animal.gender}</td>
                 <td>{animal.breed ? animal.breed.name : ''}</td>
                 <td>{animal.appearance}</td>
+                <td>{animal.client ? `${animal.client.lastName} ${animal.client.firstName}` : ''}</td>
+                <td>{animal.employee ? `${animal.employee.lastName} ${animal.employee.firstName}` : ''}</td>
               </tr>
             ))}
           </tbody>

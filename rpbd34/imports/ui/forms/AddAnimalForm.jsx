@@ -16,7 +16,6 @@ const AddAnimalForm = ({ onSubmit, animal, mode }) => {
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
   const [gender, setGender] = useState('');
-  const [breed, setBreed] = useState('');
   const [appearance, setAppearance] = useState('');
 
   useEffect(() => {
@@ -45,6 +44,7 @@ const AddAnimalForm = ({ onSubmit, animal, mode }) => {
     Meteor.call('animals.get', (error, result) => {
       if (!error) {
         setMothers(result);
+        setFathers(result);
       }
     });
 
@@ -58,7 +58,6 @@ const AddAnimalForm = ({ onSubmit, animal, mode }) => {
       setName(animal.name || '');
       setAge(animal.age || '');
       setGender(animal.gender || '');
-      setBreed(animal.breed || '');
       setAppearance(animal.appearance || '');
     }
   }, [mode, animal]);
@@ -68,16 +67,15 @@ const AddAnimalForm = ({ onSubmit, animal, mode }) => {
     // Do any other form validation if needed
 
     const animalData = {
-      client: selectedClient,
-      employee: selectedEmployee,
-      breed: selectedBreed,
-      mother: selectedMother,
-      father: selectedFather,
       name,
       age,
       gender,
-      breed,
+      breed: selectedBreed,
       appearance,
+      client: selectedClient,
+      employee: selectedEmployee,
+      mother: selectedMother,
+      father: selectedFather,
     };
 
     onSubmit(animalData);
@@ -153,10 +151,10 @@ const AddAnimalForm = ({ onSubmit, animal, mode }) => {
             setSelectedClient(clientObject);
           }}
         >
-          <option value="">Select Client</option>
+          <option value="">Не выбран</option>
           {clients.map((client) => (
             <option key={client._id} value={client._id}>
-              {client.name}
+              {client.lastName} {client.firstName}
             </option>
           ))}
         </select>
@@ -207,7 +205,7 @@ const AddAnimalForm = ({ onSubmit, animal, mode }) => {
             setSelectedFather(fatherObject);
           }}
         >
-          <option value="">Select Father</option>
+          <option value="">Не выбран</option>
           {fathers.map((father) => (
             <option key={father._id} value={father._id}>
               {father.name}

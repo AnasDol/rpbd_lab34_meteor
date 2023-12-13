@@ -10,8 +10,8 @@ const AddClientForm = ({ onSubmit, client, mode }) => {
   useEffect(() => {
     if (mode === 'update' && client) {
       // If in update mode and client is provided, set the values from the selected client
-      setLastName(client.last_name || '');
-      setFirstName(client.first_name || '');
+      setLastName(client.lastName || '');
+      setFirstName(client.firstName || '');
       setPatronymic(client.patronymic || '');
       setAddress(client.address || '');
     }
@@ -21,7 +21,7 @@ const AddClientForm = ({ onSubmit, client, mode }) => {
     e.preventDefault();
     // Do any other form validation if needed
 
-    const clientData = { last_name: lastName, first_name: firstName, patronymic, address };
+    const clientData = { lastName: lastName, firstName: firstName, patronymic, address };
     onSubmit(clientData);
   };
 

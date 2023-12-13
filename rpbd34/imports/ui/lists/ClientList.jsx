@@ -130,8 +130,8 @@ const ClientList = () => {
                 className={selectedClient && selectedClient._id === client._id ? 'selected-row' : ''}
               >
                 <td>{index + 1}</td>
-                <td>{client.last_name}</td>
-                <td>{client.first_name}</td>
+                <td>{client.lastName}</td>
+                <td>{client.firstName}</td>
                 <td>{client.patronymic}</td>
                 <td>{client.address}</td>
               </tr>
