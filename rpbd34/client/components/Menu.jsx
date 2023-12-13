@@ -36,6 +36,10 @@ const Menu = ({ setActiveTab }) => {
     setActiveTab('animalList')
   };
 
+  const handleParticipationListClick = () => {
+    setActiveTab('participationList')
+  };
+
   const handleLogout = () => {
     Meteor.logout((error) => {
       if (error) {
@@ -77,6 +81,9 @@ const Menu = ({ setActiveTab }) => {
         </button>
         <button className="menu-button" onClick={handleAnimalListClick}>
           Животные
+        </button>
+        <button className="menu-button" onClick={handleParticipationListClick}>
+          Участие в выставках
         </button>
       </div>
       <div className="right-buttons">

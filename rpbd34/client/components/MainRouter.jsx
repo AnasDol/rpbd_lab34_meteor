@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './Login';
 import AdminPanel from './AdminPanel';
@@ -13,9 +13,20 @@ import AddEmployeeForm from '../../imports/ui/forms/AddEmployeeForm';
 import EmployeeList from '../../imports/ui/lists/EmployeeList';
 import RequestList from '../../imports/ui/lists/RequestList';
 import AnimalList from '../../imports/ui/lists/AnimalList';
+import AnimalList2 from '../../imports/ui/lists/AnimalList2';
+import ParticipationList from '../../imports/ui/lists/ParticipationList';
 
 const MainRouter = () => {
   const [activeTab, setActiveTab] = useState('breedList');
+  const [animals, setAnimals] = useState([]);
+
+  useEffect(() => {
+    Meteor.call('animals.get', (error, result) => {
+      if (!error) {
+        setAnimals(result);
+      }
+    });
+  }, []);
 
   return (
     <Router>
@@ -31,7 +42,9 @@ const MainRouter = () => {
             {activeTab === 'exhibitionList' && <ExhibitionList />}
             {activeTab === 'employeeList' && <EmployeeList />}
             {activeTab === 'requestList' && <RequestList />}
+            {/* {activeTab === 'animalList' && <AnimalList2 animalSet={animals}/>} */}
             {activeTab === 'animalList' && <AnimalList/>}
+            {activeTab === 'participationList' && <ParticipationList/>}
           </>
           }
           />

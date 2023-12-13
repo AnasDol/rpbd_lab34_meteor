@@ -11,6 +11,7 @@ import '/imports/api/methods/exhibitionMethods.js';
 import '/imports/api/methods/employeeMethods.js';
 import '/imports/api/methods/requestMethods.js';
 import '/imports/api/methods/animalsMethods.js';
+import '/imports/api/methods/participationMethods.js';
 
 Meteor.startup(async () => {
 
