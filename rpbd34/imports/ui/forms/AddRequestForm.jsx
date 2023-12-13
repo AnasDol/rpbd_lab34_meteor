@@ -34,14 +34,6 @@ const AddRequestForm = ({ onSubmit, request, mode }) => {
     }
   }, [mode, request]);
 
-  const formatDate = (inputDate) => {
-    const dateObject = new Date(inputDate);
-    const day = dateObject.getDate().toString().padStart(2, '0');
-    const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
-    const year = dateObject.getFullYear();
-    return `${day}.${month}.${year}`;
-  };
-
   const parseDate = (inputDate) => {
     if (!inputDate) {
       return null;
@@ -86,7 +78,7 @@ const AddRequestForm = ({ onSubmit, request, mode }) => {
           <option value="">Select Client</option>
           {clients.map((client) => (
             <option key={client._id} value={client._id}>
-              {client.name}
+              {client.lastName} {client.firstName}
             </option>
           ))}
         </select>

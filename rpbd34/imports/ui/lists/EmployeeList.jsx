@@ -5,6 +5,7 @@ import AddEmployeeForm from '../forms/AddEmployeeForm';
 
 const EmployeeList = () => {
     const [employees, setEmployees] = useState([]);
+    const [positions, setPositions] = useState([]);
     const [selectedEmployee, setSelectedEmployee] = useState(null);
     const [showAddForm, setShowAddForm] = useState(false);
     const [formMode, setFormMode] = useState('add'); // 'add' or 'update'
@@ -15,6 +16,14 @@ const EmployeeList = () => {
       Meteor.call('employees.get', (error, result) => {
         if (!error) {
           setEmployees(result);
+        }
+      });
+    }, []);
+
+    useEffect(() => {
+      Meteor.call('positions.get', (error, result) => {
+        if (!error) {
+          setPositions(result);
         }
       });
     }, []);
@@ -143,7 +152,11 @@ const EmployeeList = () => {
                 <td>{employee.firstName}</td>
                 <td>{employee.patronymic}</td>
                 <td>{employee.address}</td>
-                <td>{employee.position.name}</td>
+                <td>
+                  {employee.position ? (
+                    positions.find(position => position._id === employee.position._id)?.name || ''
+                  ) : ''}
+                </td>
                 <td>{employee.salary}</td>
               </tr>
             ))}

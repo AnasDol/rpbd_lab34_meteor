@@ -5,6 +5,8 @@ import AddRequestForm from '../forms/AddRequestForm';
 
 const RequestList = () => {
   const [requests, setRequests] = useState([]);
+  const [breeds, setBreeds] = useState([]);
+  const [clients, setClients] = useState([]);
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [showAddForm, setShowAddForm] = useState(false);
   const [formMode, setFormMode] = useState('add'); // 'add' or 'update'
@@ -15,6 +17,22 @@ const RequestList = () => {
     Meteor.call('requests.get', (error, result) => {
       if (!error) {
         setRequests(result);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    Meteor.call('clients.get', (error, result) => {
+      if (!error) {
+        setClients(result);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    Meteor.call('breeds.get', (error, result) => {
+      if (!error) {
+        setBreeds(result);
       }
     });
   }, []);
@@ -128,8 +146,16 @@ const RequestList = () => {
                 className={selectedRequest && selectedRequest._id === request._id ? 'selected-row' : ''}
               >
                 <td>{index + 1}</td>
-                <td>{request.client ? request.client.name : ''}</td>
-                <td>{request.breed ? request.breed.name : ''}</td>
+                <td>
+                {request.client ? (
+                    clients.find(client => client._id === request.client._id)?.lastName || ''
+                ) : ''}
+                </td>
+                <td>
+                {request.breed ? (
+                    breeds.find(breed => breed._id === request.breed._id)?.name || ''
+                ) : ''}
+                </td>
                 <td>{request.gender}</td>
                 <td>{request.date instanceof Date ? request.date.toISOString().split('T')[0] : ''}</td>
               </tr>
