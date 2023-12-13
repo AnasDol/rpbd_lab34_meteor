@@ -69,13 +69,31 @@ const ParticipationList = () => {
           console.error('Error deleting participation:', error);
         } else {
           // Fetch the updated list of participations after deletion
-          Meteor.call('participations.get', (error, result) => {
-            if (!error) {
-              setParticipations(result);
-            } else {
-              console.error('Error fetching updated participations:', error);
-            }
-          });
+
+          if (selectedAnimalId) {
+            Meteor.call('participations.getByAnimal', selectedAnimalId, (error, result) => {
+              if (!error) {
+                setParticipations(result);
+              } else {
+                console.error('Error fetching participations:', error);
+              }
+            });
+          } else {
+              Meteor.call('participations.get', (error, result) => {
+                  if (!error) {
+                    setParticipations(result);
+                  } else {
+                    console.error('Error fetching participations:', error);
+                  }
+                });
+          }
+        //   Meteor.call('participations.get', (error, result) => {
+        //     if (!error) {
+        //       setParticipations(result);
+        //     } else {
+        //       console.error('Error fetching updated participations:', error);
+        //     }
+        //   });
 
           console.log(`Participation with ID ${participationId} deleted successfully!`);
           setSelectedParticipation(null); // Clear the selected participation after deletion
@@ -92,49 +110,89 @@ const ParticipationList = () => {
   };
 
   const handleAddParticipation = (participationData) => {
-    if (selectedAnimalId) {
+
         if (formMode === 'add') {
-            Meteor.call('participations.insert', authToken, participationData, (error) => {
-              if (error) {
-                console.error('Error inserting participation:', error);
-              } else {
-                Meteor.call('participations.getByAnimal', selectedAnimalId, (error, result) => {
-                  if (!error) {
-                    setParticipations(result);
-                  } else {
-                    console.error('Error fetching participations:', error);
-                  }
-                });
-                console.log('Participation inserted successfully!');
-              }
-            });
-          } else if (formMode === 'update') {
-            if (selectedParticipation) {
-              const participationId = selectedParticipation._id;
-              Meteor.call('participations.update', authToken, participationId, participationData, (error) => {
+            if (selectedAnimalId) {
+                Meteor.call('participations.insert', authToken, participationData, (error) => {
                 if (error) {
-                  console.error('Error updating participation:', error);
+                    console.error('Error inserting participation:', error);
                 } else {
-                  // Fetch the updated list of participations after update
-                  Meteor.call('participations.getByAnimal', selectedAnimalId, (error, result) => {
-                    if (!error) {
-                      setParticipations(result);
-                    } else {
-                      console.error('Error fetching participations:', error);
-                    }
-                  });
-                  console.log(`Participation with ID ${participationId} updated successfully!`);
-                  setSelectedParticipation(null); // Clear the selected participation after update
+
+                    if (selectedAnimalId) {
+                        Meteor.call('participations.getByAnimal', selectedAnimalId, (error, result) => {
+                          if (!error) {
+                            setParticipations(result);
+                          } else {
+                            console.error('Error fetching participations:', error);
+                          }
+                        });
+                      } else {
+                          Meteor.call('participations.get', (error, result) => {
+                              if (!error) {
+                                setParticipations(result);
+                              } else {
+                                console.error('Error fetching participations:', error);
+                              }
+                            });
+                      }
+                    // Meteor.call('participations.getByAnimal', selectedAnimalId, (error, result) => {
+                    // if (!error) {
+                    //     setParticipations(result);
+                    // } else {
+                    //     console.error('Error fetching participations:', error);
+                    // }
+                    // });
+                    // console.log('Participation inserted successfully!');
                 }
-              });
+                });
             } else {
-              console.warn('No participation selected for update.');
+                console.warn('Select animal to add participation.');
+            }
+        } 
+          else if (formMode === 'update') {
+            if (selectedParticipation) {
+            const participationId = selectedParticipation._id;
+            Meteor.call('participations.update', authToken, participationId, participationData, (error) => {
+                if (error) {
+                console.error('Error updating participation:', error);
+                } else {
+                // Fetch the updated list of participations after update
+
+                if (selectedAnimalId) {
+                    Meteor.call('participations.getByAnimal', selectedAnimalId, (error, result) => {
+                      if (!error) {
+                        setParticipations(result);
+                      } else {
+                        console.error('Error fetching participations:', error);
+                      }
+                    });
+                  } else {
+                      Meteor.call('participations.get', (error, result) => {
+                          if (!error) {
+                            setParticipations(result);
+                          } else {
+                            console.error('Error fetching participations:', error);
+                          }
+                        });
+                  }
+
+
+
+                // Meteor.call('participations.getByAnimal', selectedAnimalId, (error, result) => {
+                //     if (!error) {
+                //     setParticipations(result);
+                //     } else {
+                //     console.error('Error fetching participations:', error);
+                //     }
+                // });
+                console.log(`Participation with ID ${participationId} updated successfully!`);
+                setSelectedParticipation(null); // Clear the selected participation after update
+                }
+            });
+            } else {
+            console.warn('No participation selected for update.');
             }
     } 
-}
-else {
-    console.warn('Select animal to add participation.');
-}
 
     setShowAddForm(false);
   };

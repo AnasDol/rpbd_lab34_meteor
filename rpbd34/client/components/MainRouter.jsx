@@ -10,6 +10,7 @@ import ExhibitionList from '../../imports/ui/lists/ExhibitionList';
 import RequestList from '../../imports/ui/lists/RequestList';
 import AnimalList from '../../imports/ui/lists/AnimalList';
 import ParticipationList from '../../imports/ui/lists/ParticipationList';
+import EmployeeList from '../../imports/ui/lists/EmployeeList';
 
 const MainRouter = () => {
   const [activeTab, setActiveTab] = useState('breedList');
