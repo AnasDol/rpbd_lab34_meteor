@@ -43,8 +43,18 @@ const AddRequestForm = ({ onSubmit, request, mode }) => {
   };
 
   const parseDate = (inputDate) => {
-    const [day, month, year] = inputDate.split('.');
-    return new Date(`${year}-${month}-${day}`);
+    if (!inputDate) {
+      return null;
+    }
+  
+    if (typeof inputDate === 'string') {
+      const [day, month, year] = inputDate.split('.');
+      return new Date(`${year}-${month}-${day}`);
+    } else if (inputDate instanceof Date) {
+      return inputDate;
+    }
+  
+    return null; // Handle other cases as needed
   };
 
   const handleSubmit = (e) => {
@@ -101,12 +111,15 @@ const AddRequestForm = ({ onSubmit, request, mode }) => {
       </label>
       <label>
         Gender:
-        <input
-          type="text"
-          value={gender}
-          onChange={(e) => setGender(e.target.value)}
-        />
-      </label>
+        <select
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
+        >
+            <option value="">Не выбран</option>
+            <option value="male">Мужской</option>
+            <option value="female">Женский</option>
+        </select>
+        </label>
       <label>
         Date:
         <input
