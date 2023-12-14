@@ -106,8 +106,14 @@ thead th {
 }
 
 .menu-button {
+  /* cursor: pointer;
+  font-size: 16px; */
+  background-color: #8dc44a;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
-  font-size: 16px;
 }
 
 .menu-button:hover {

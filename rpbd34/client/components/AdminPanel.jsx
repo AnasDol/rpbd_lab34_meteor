@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { useNavigate } from 'react-router-dom';
 import UserList from '../../imports/ui/lists/UserList';
 import AddUserForm from '../../imports/ui/forms/AddUserForm';
+import '../../imports/ui/styles.css'; // Import the styles
 
 const AdminPanel = () => {
   const navigate = useNavigate();
@@ -45,12 +46,12 @@ const AdminPanel = () => {
   };
 
   return (
-    <div>
+    <div className='collection-container'>
       <h2>Admin Panel</h2>
       <button className="logout-button" onClick={handleLogout}>
         Logout
       </button>
-      <button className="add-user-button" onClick={handleAddUserClick}>
+      <button className="add-new-button" onClick={handleAddUserClick}>
         Add New User
       </button>
       <UserList />

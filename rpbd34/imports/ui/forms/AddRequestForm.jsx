@@ -95,7 +95,7 @@ const AddRequestForm = ({ onSubmit, request, mode }) => {
           }}
           required
         >
-          <option value="">Select Breed</option>
+          <option value="">Не выбран</option>
           {breeds.map((breed) => (
             <option key={breed._id} value={breed._id}>
               {breed.name}

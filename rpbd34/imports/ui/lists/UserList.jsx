@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Tracker } from 'meteor/tracker';
+import '../styles.css';
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
@@ -54,9 +55,9 @@ const UserList = () => {
   };
 
   return (
-    <div className="clients-container">
+    <div className="collection-container">
       <h2>User List</h2>
-      <table className="clients-table">
+      <table className="collection-table">
         <thead>
           <tr>
             <th>Username</th>

@@ -93,7 +93,7 @@ const AddEmployeeForm = ({ onSubmit, employee, mode }) => {
           }}
           required
         >
-          <option value="">Select Position</option>
+          <option value="">Не выбран</option>
           {positions.map((position) => (
             <option key={position._id} value={position._id}>
               {position.name}

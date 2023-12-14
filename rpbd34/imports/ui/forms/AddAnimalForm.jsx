@@ -102,7 +102,7 @@ const AddAnimalForm = ({ onSubmit, animal, mode }) => {
       
       
       <label>
-        Name:
+        Имя:
         <input
           type="text"
           value={name}
@@ -111,7 +111,7 @@ const AddAnimalForm = ({ onSubmit, animal, mode }) => {
         />
       </label>
       <label>
-        Age:
+        Возраст:
         <input
           type="text"
           value={age}
@@ -119,18 +119,18 @@ const AddAnimalForm = ({ onSubmit, animal, mode }) => {
         />
       </label>
       <label>
-        Gender:
+        Пол:
         <select
           value={gender}
           onChange={(e) => setGender(e.target.value)}
         >
-          <option value="">Select Gender</option>
+          <option value="">Не выбран</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
         </select>
       </label>
       <label>
-        Breed:
+        Порода:
         <select
           value={selectedBreed ? selectedBreed._id : ''}
           onChange={(e) => {
@@ -139,7 +139,7 @@ const AddAnimalForm = ({ onSubmit, animal, mode }) => {
             setSelectedBreed(breedObject);
           }}
         >
-          <option value="">Select Breed</option>
+          <option value="">Не выбран</option>
           {breeds.map((breed) => (
             <option key={breed._id} value={breed._id}>
               {breed.name}
@@ -148,7 +148,7 @@ const AddAnimalForm = ({ onSubmit, animal, mode }) => {
         </select>
       </label>
       <label>
-        Appearance:
+        Описание экстерьера:
         <input
           type="text"
           value={appearance}
@@ -156,7 +156,7 @@ const AddAnimalForm = ({ onSubmit, animal, mode }) => {
         />
       </label>
       <label>
-        Client:
+        Клиент:
         <select
           value={selectedClient ? selectedClient._id : ''}
           onChange={(e) => {
@@ -174,7 +174,7 @@ const AddAnimalForm = ({ onSubmit, animal, mode }) => {
         </select>
       </label>
       <label>
-        Vet:
+        Ветеринар:
         <select
           value={selectedEmployee ? selectedEmployee._id : ''}
           onChange={(e) => {
@@ -183,7 +183,7 @@ const AddAnimalForm = ({ onSubmit, animal, mode }) => {
             setSelectedEmployee(employeeObject);
           }}
         >
-          <option value="">Select Employee</option>
+          <option value="">Не выбран</option>
             {employees
               .filter(employee => employee.position.name === 'ветеринар') // Фильтрация по должности ветеринара
               .map((employee) => (
@@ -194,7 +194,7 @@ const AddAnimalForm = ({ onSubmit, animal, mode }) => {
         </select>
       </label>
       <label>
-        Mother:
+        Мать:
         <select
           value={selectedMother ? selectedMother._id : ''}
           onChange={(e) => {
@@ -212,7 +212,7 @@ const AddAnimalForm = ({ onSubmit, animal, mode }) => {
         </select>
       </label>
       <label>
-        Father:
+        Отец:
         <select
           value={selectedFather ? selectedFather._id : ''}
           onChange={(e) => {

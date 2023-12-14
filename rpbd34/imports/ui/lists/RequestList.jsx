@@ -146,10 +146,18 @@ const RequestList = () => {
                 className={selectedRequest && selectedRequest._id === request._id ? 'selected-row' : ''}
               >
                 <td>{index + 1}</td>
-                <td>
+                {/* <td>
                 {request.client ? (
                     clients.find(client => client._id === request.client._id)?.lastName || ''
                 ) : ''}
+                </td> */}
+                <td>
+                  {request.client ? (
+                    (() => {
+                      const foundClient = clients.find(client => client._id === request.client._id);
+                      return foundClient ? `${foundClient.firstName} ${foundClient.lastName}` : '';
+                    })()
+                  ) : ''}
                 </td>
                 <td>
                 {request.breed ? (

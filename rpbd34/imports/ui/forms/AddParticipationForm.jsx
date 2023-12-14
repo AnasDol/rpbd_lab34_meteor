@@ -53,7 +53,7 @@ const AddParticipationForm = ({ onSubmit, participation, selectedAnimal, mode })
           }}
           required
         >
-          <option value="">Select Exhibition</option>
+          <option value="">Не выбран</option>
           {exhibitions.map((exhibition) => (
             <option key={exhibition._id} value={exhibition._id}>
               {exhibition.name}

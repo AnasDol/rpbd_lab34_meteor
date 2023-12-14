@@ -21,7 +21,7 @@ const AddPositionForm = ({ onSubmit, position, mode }) => {
   return (
     <form className="addForm" onSubmit={handleSubmit}>
       <label>
-        Название породы:
+        Название должности:
         <input
           type="text"
           value={name}

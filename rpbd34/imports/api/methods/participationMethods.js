@@ -38,18 +38,20 @@ Meteor.methods({
       throw new Meteor.Error('not-authorized', 'Only authorized users can update records.');
     }
 
-    check(idToUpdate, String);
-    check(data, {
-      animal: Object,
-      exhibition: Object,
-      reward: String,
-    });
+    console.log(data, idToUpdate);
+
+    //check(idToUpdate, String);
+    // check(data, {
+    //   animal: Object,
+    //   exhibition: Object,
+    //   reward: String,
+    // });
 
     // Проверка уникальности комбинации animal и exhibition
-    const existingRecord = Records.findOne({ 'animal._id': data.animal._id, 'exhibition._id': data.exhibition._id, _id: { $ne: idToUpdate } });
-    if (existingRecord) {
-      throw new Meteor.Error('duplicate-participation', 'Record with the same animal and exhibition already exists.');
-    }
+    // const existingRecord = Records.findOne({ 'animal._id': data.animal._id, 'exhibition._id': data.exhibition._id, _id: { $ne: idToUpdate } });
+    // if (existingRecord._id !== idToUpdate) {
+    //   throw new Meteor.Error('duplicate-participation', 'Record with the same animal and exhibition already exists.');
+    // }
 
     const recordToUpdate = Records.findOne({ _id: idToUpdate });
     if (!recordToUpdate) {
